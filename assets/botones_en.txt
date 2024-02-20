@@ -1,0 +1,40 @@
+botones_en.png
+size: 966, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+button_personaje
+  rotate: false
+  xy: 0, 0
+  size: 218, 66
+  orig: 218, 66
+  offset: 0, 0
+  index: -1
+button_mapa
+  rotate: false
+  xy: 218, 0
+  size: 139, 66
+  orig: 139, 66
+  offset: 0, 0
+  index: -1
+button_jugar_partida
+  rotate: false
+  xy: 357, 0
+  size: 218, 66
+  orig: 218, 66
+  offset: 0, 0
+  index: -1
+button_records
+  rotate: false
+  xy: 575, 0
+  size: 190, 66
+  orig: 190, 66
+  offset: 0, 0
+  index: -1
+button_configuracion
+  rotate: false
+  xy: 765, 0
+  size: 201, 66
+  orig: 201, 66
+  offset: 0, 0
+  index: -1

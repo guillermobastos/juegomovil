@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rocket Dodging</string>
+    <string name="jugar">JUGAR</string>
+    <string name="config">CONFIGURACIÓN</string>
+    <string name="muerte">HAS MUERTO</string>
+    <string name="dia">DÍA</string>
+    <string name="noche">NOCHE</string>
+
+</resources>

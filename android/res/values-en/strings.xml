@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rocket Dodging</string>
+    <string name="jugar">PLAY</string>
+    <string name="config">CONFIGURATION</string>
+    <string name="muerte">YOU HAVE DIED</string>
+    <string name="dia">DAY</string>
+    <string name="noche">NIGHT</string>
+</resources>
