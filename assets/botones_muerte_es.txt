@@ -1,0 +1,19 @@
+botones_muerte_es.png
+size: 558, 66
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+button_salir
+  rotate: false
+  xy: 0, 0
+  size: 286, 66
+  orig: 286, 66
+  offset: 0, 0
+  index: -1
+button_volver_jugar
+  rotate: false
+  xy: 286, 0
+  size: 272, 66
+  orig: 272, 66
+  offset: 0, 0
+  index: -1
