@@ -75,7 +75,7 @@ public class MiJuego extends Game {
     public FileHandle baseFileHandle;
 
     // Sonidos para la muerte del personaje y al hacer click en cualquier botón
-    private Sound muerte, click,vibracion;
+    private Sound muerte, click;
 
     // Música de fondo
     private Music musica;
@@ -101,7 +101,7 @@ public class MiJuego extends Game {
         viewport = new StretchViewport(10.8f, 7.2f, camera);
         world = new World(new Vector2(0, -50), true);
 
-        gameState = GameConstants.SCREEN_MAPA;
+        gameState = GameConstants.SCREEN_MENU;
         isDia = isSonido = idioma_es = isVibracion = true;
         isTutorial = false;
         personaje = new Personaje(200, 200, world);
@@ -278,7 +278,7 @@ public class MiJuego extends Game {
 
 
         b2 = new Box2DDebugRenderer();
-        b2.setDrawBodies(false);
+//        b2.setDrawBodies(false);
         world.setContactListener(new ContactListener() {
 
             /**
@@ -296,7 +296,7 @@ public class MiJuego extends Game {
                         muerte.play();
                     }
                     if(isVibracion) {
-                        vibracion.play();
+                        Gdx.input.vibrate(400);
                     }
                     Gdx.input.vibrate(800);
                     hit();
@@ -323,6 +323,7 @@ public class MiJuego extends Game {
     @Override
     public void render() {
         switch (gameState) {
+
             // Pantalla de Juego
             case GameConstants.SCREEN_PLAY:
                 world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
@@ -506,6 +507,7 @@ public class MiJuego extends Game {
             click.play();
         }
     }
+
 
     /**
      * Vuelve al menu principal una vez se clique en el botón de volver

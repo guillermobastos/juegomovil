@@ -103,8 +103,8 @@ public class Personaje {
         position = new Vector2(x, y);
         death = false;
         animation = animationNaranja;
-        anchoPersonaje = (int)GameConstants.ANCHO_PANTALLA/18;
-        altoPersonaje = (int)GameConstants.ALTO_PANTALLA/10;
+        anchoPersonaje = (int)GameConstants.ANCHO_PANTALLA/24;
+        altoPersonaje = (int)GameConstants.ALTO_PANTALLA/12;
 
         bodyDef = new BodyDef();
         bodyDef.fixedRotation = true;

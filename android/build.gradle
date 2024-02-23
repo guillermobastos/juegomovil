@@ -1,7 +1,7 @@
 android {
     namespace "com.pruebas.game"
-    buildToolsVersion "34.0.0"
-    compileSdkVersion 34
+    buildToolsVersion "33.0.0"
+    compileSdkVersion 33
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "com.pruebas.game"
         minSdkVersion 14
-        targetSdkVersion 34
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -32,9 +32,9 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'C:\\Users\\guille\\AppData\\Local\\Android\\Sdk\\platforms\\android-34', include: ['*.aar', '*.jar'], exclude: [])
-}
+//dependencies {
+//    implementation fileTree(dir: 'C:\\Users\\guille\\AppData\\Local\\Android\\Sdk\\platforms\\android-34', include: ['*.aar', '*.jar'], exclude: [])
+//}
 
 
 // called every time gradle gets executed, takes the native dependencies of

@@ -110,51 +110,51 @@ public class Fondos {
         // Btn Jugar
         botonJugar = textureAtlas.createSprite("button_jugar_partida");
         botonJugar.setSize(width, height);
-        botonJugar.setPosition(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, 30);
-        rJugar = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, 30, width, height);
+        botonJugar.setPosition(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, espacio_entre_botones);
+        rJugar = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, espacio_entre_botones, width, height);
         botonJugar.draw(spriteBatch);
 
         // Btn Personaje
         botonPersonaje = textureAtlas.createSprite("button_personaje");
         botonPersonaje.setSize(width, height);
-        botonPersonaje.setPosition(anchoPantalla - botonPersonaje.getWidth() - espacio_entre_botones, botonJugar.getY() + botonJugar.getHeight() + 20);
-        rPersonaje = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, botonJugar.getY() + botonJugar.getHeight() + 20, width, height);
+        botonPersonaje.setPosition(anchoPantalla - botonPersonaje.getWidth() - espacio_entre_botones, botonJugar.getY() + botonJugar.getHeight() + espacio_entre_botones/2);
+        rPersonaje = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, botonJugar.getY() + botonJugar.getHeight() + espacio_entre_botones/2, width, height);
         botonPersonaje.draw(spriteBatch);
 
         // Btn Mapa
         botonMapa = textureAtlas.createSprite("button_mapa");
         botonMapa.setSize(width, height);
-        botonMapa.setPosition(anchoPantalla - botonMapa.getWidth() - espacio_entre_botones, botonPersonaje.getY() + botonPersonaje.getHeight() + 20);
-        rMapa = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, botonPersonaje.getY() + botonPersonaje.getHeight() + 20, width, height);
+        botonMapa.setPosition(anchoPantalla - botonMapa.getWidth() - espacio_entre_botones, botonPersonaje.getY() + botonPersonaje.getHeight() + espacio_entre_botones/2);
+        rMapa = new Rectangle(anchoPantalla - botonJugar.getWidth() - espacio_entre_botones, botonPersonaje.getY() + botonPersonaje.getHeight() + espacio_entre_botones/2, width, height);
         botonMapa.draw(spriteBatch);
 
         // Btn Tutorial
         botonTutorial = textureAtlas.createSprite("button_tutorial");
         botonTutorial.setSize(width, height);
-        botonTutorial.setPosition(anchoPantalla - botonJugar.getWidth() - botonTutorial.getWidth() - 1.5f * espacio_entre_botones, 30);
+        botonTutorial.setPosition(anchoPantalla - botonJugar.getWidth() - botonTutorial.getWidth() - 1.5f * espacio_entre_botones, espacio_entre_botones);
 
-        rTutorial = new Rectangle(anchoPantalla - botonJugar.getWidth() - botonTutorial.getWidth() - 1.5f * espacio_entre_botones, 30, width, height);
+        rTutorial = new Rectangle(anchoPantalla - botonJugar.getWidth() - botonTutorial.getWidth() - 1.5f * espacio_entre_botones, espacio_entre_botones, width, height);
         botonTutorial.draw(spriteBatch);
 
         // Btn Config
         botonConfig = textureAtlas.createSprite("button_configuracion");
         botonConfig.setSize(width, height);
-        botonConfig.setPosition(espacio_entre_botones, 30);
-        rConfig = new Rectangle(espacio_entre_botones, 30, width, height);
+        botonConfig.setPosition(espacio_entre_botones, espacio_entre_botones);
+        rConfig = new Rectangle(espacio_entre_botones, espacio_entre_botones, width, height);
         botonConfig.draw(spriteBatch);
 
         // Btn Record
         botonRecord = textureAtlas.createSprite("button_records");
         botonRecord.setSize(width, height);
-        botonRecord.setPosition(espacio_entre_botones, botonConfig.getY() + botonConfig.getHeight() + 20);
-        rRecord = new Rectangle(espacio_entre_botones, botonConfig.getY() + botonConfig.getHeight() + 20, width, height);
+        botonRecord.setPosition(espacio_entre_botones, botonConfig.getY() + botonConfig.getHeight() + espacio_entre_botones/2);
+        rRecord = new Rectangle(espacio_entre_botones, botonConfig.getY() + botonConfig.getHeight() + espacio_entre_botones/2, width, height);
         botonRecord.draw(spriteBatch);
 
         // Btn Créditos
         botonCreditos = textureAtlas.createSprite("button_creditos");
         botonCreditos.setSize(width, height);
-        botonCreditos.setPosition(1.5f * espacio_entre_botones + botonConfig.getWidth(), 30);
-        rCreditos = new Rectangle(1.5f * espacio_entre_botones + botonConfig.getWidth(), 30, width, height);
+        botonCreditos.setPosition(1.5f * espacio_entre_botones + botonConfig.getWidth(), espacio_entre_botones);
+        rCreditos = new Rectangle(1.5f * espacio_entre_botones + botonConfig.getWidth(), espacio_entre_botones, width, height);
         botonCreditos.draw(spriteBatch);
 
     }
@@ -214,15 +214,15 @@ public class Fondos {
     public void dibujarTutorial() {
         font.setColor(Color.WHITE);
         font.getData().setScale(1.50F);
-        font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_derecho"), 200, altoPantalla - 200, anchoPantalla / 5, 50, true);
-        font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_izquierdo"), anchoPantalla * 3 / 4, altoPantalla - 200, anchoPantalla / 5, 50, true);
+        font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_derecho"), espacio_entre_botones, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
+        font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_izquierdo"), anchoPantalla * 3 / 4, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         if (metros < 200) {
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_esquiva"), anchoPantalla * 5 / 12, altoPantalla - 100, anchoPantalla / 3, 10, true);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_esquiva"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 10, true);
         } else if (metros < 700) {
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_sobrevive"), anchoPantalla * 5 / 12, altoPantalla - 100, anchoPantalla / 3, 50, true);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_sobrevive"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 50, true);
         } else {
             font.getData().setScale(2.50F);
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_completado"), anchoPantalla / 2, altoPantalla - 100, anchoPantalla / 3, 100, false);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_completado"), anchoPantalla / 2, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 100, false);
             font.getData().setScale(1);
         }
     }
@@ -246,12 +246,14 @@ public class Fondos {
      */
     public void dibujarFondoCreditos(String[] nombres) {
         dibujarFondo();
+        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 42);
         font.getData().setScale(1.5f);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")), anchoPantalla / 2 - 300, altoPantalla - 60);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")), anchoPantalla / 3 - espacio_entre_botones/2, altoPantalla - espacio_entre_botones/2);
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES.length; i++) {
-            font.draw(spriteBatch, String.format("%s", nombres[i]), anchoPantalla / 2 - 300, altoPantalla - 80 - ((i + 1) * 60));
+            font.draw(spriteBatch, String.format("%s", nombres[i]), anchoPantalla / 3 - espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones*2/3));
         }
         dibujarBotonVolver();
+        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
     }
 
 
@@ -291,13 +293,13 @@ public class Fondos {
         botonVolverJugar.setSize(width, height);
         botonVolverJugar.setPosition(anchoPantalla / 2 - botonJugar.getWidth() - 30, altoPantalla / 2);
         botonVolverJugar.draw(spriteBatch);
-        rVolverJugar = new Rectangle(anchoPantalla / 2 - botonJugar.getWidth() - 30, altoPantalla / 2, 250, 90);
+        rVolverJugar = new Rectangle(anchoPantalla / 2 - botonJugar.getWidth() - 30, altoPantalla / 2, width, height);
 
         botonSalir = textureAtlas.createSprite("button_salir");
         botonSalir.setSize(width, height);
         botonSalir.setPosition(anchoPantalla / 2 + botonJugar.getWidth() - 30, altoPantalla / 2);
         botonSalir.draw(spriteBatch);
-        rSalir = new Rectangle(anchoPantalla / 2 + botonJugar.getWidth() - 30, altoPantalla / 2, 250, 90);
+        rSalir = new Rectangle(anchoPantalla / 2 + botonJugar.getWidth() - 30, altoPantalla / 2, width, height);
 
         font.setColor(Color.RED);
         font.getData().setScale(3);
@@ -330,15 +332,17 @@ public class Fondos {
 
     /**
      * Dibuja los metros recorridos por el personaje en el centro superior de la pantalla
+     * y el Acelerómetro
      */
     public void dibujarMetros() {
         font.getData().setScale(2f);
         font.setColor(GameConstants.COLORES[miJuego.nivel - 1]);
         if (metros < 1000) {
-            font.draw(spriteBatch, String.format("%s %d: %.0fm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros), anchoPantalla / 2 - 150, altoPantalla - 5);
+            font.draw(spriteBatch, String.format("%s %d: %.0fm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros), anchoPantalla / 2 - espacio_entre_botones/2, altoPantalla - altoPantalla/25);
         } else {
-            font.draw(spriteBatch, String.format("%s %d: %.2fkm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros / 1000), anchoPantalla / 2 - 150, altoPantalla - 5);
+            font.draw(spriteBatch, String.format("%s %d: %.2fkm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros / 1000), anchoPantalla / 2 - espacio_entre_botones/2, altoPantalla - altoPantalla/25);
         }
+        font.draw(spriteBatch, String.format("Accelerometer:%.0f", Gdx.input.getAccelerometerX()), anchoPantalla / 3-espacio_entre_botones/2, altoPantalla - altoPantalla/25);
     }
 
     /**
@@ -346,8 +350,8 @@ public class Fondos {
      */
     public void dibujarBotonVolver() {
         volver = miJuego.idioma_es ? new Texture(Gdx.files.internal("button_volver_es.png")) : new Texture(Gdx.files.internal("button_volver_en.png"));
-        spriteBatch.draw(volver, anchoPantalla - 300, 100, width, height);
-        rVolver = new Rectangle(anchoPantalla - 300, 100, width, height);
+        spriteBatch.draw(volver, anchoPantalla - width -espacio_entre_botones, espacio_entre_botones, width, height);
+        rVolver = new Rectangle(anchoPantalla - width -espacio_entre_botones, espacio_entre_botones, width, height);
     }
 
     /**

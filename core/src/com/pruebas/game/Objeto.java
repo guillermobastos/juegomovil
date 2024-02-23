@@ -135,8 +135,8 @@ public class Objeto {
                         new Sprite(new Texture(Gdx.files.internal("cohete_0.png"))),
                         new Sprite(new Texture(Gdx.files.internal("cohete_1.png")))
                 });
-                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 18;
-                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 14;
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 22;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 18;
                 isCohete = true;
                 isBolaFuego = false;
                 break;
@@ -145,15 +145,15 @@ public class Objeto {
                         new Sprite(new Texture(Gdx.files.internal("flecha_0.png"))),
                         new Sprite(new Texture(Gdx.files.internal("flecha_1.png")))
                 });
-                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 14;
-                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 13;
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 20;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 20;
                 isFlecha = true;
                 isBolaFuego = false;
                 break;
             case 3:
                 bolaFuego = new Texture(Gdx.files.internal("bola_de_fuego.png"));
-                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 8;
-                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 8;
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 12;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 12;
                 isBolaFuego = true;
                 break;
         }
@@ -166,6 +166,11 @@ public class Objeto {
      * @param y indicada las coordenadas en el eje y que se van a mover
      */
     public void move(float x, float y) {
+        // Acelerómetro
+        if(Gdx.input.getAccelerometerX() > 0) {
+            y *= 1.4f;
+            x *= 1.2f;
+        }
         if (isCohete) {
             body.setTransform(new Vector2(body.getPosition().x + 2 * x, body.getPosition().y + 2 * y), 0);
         }

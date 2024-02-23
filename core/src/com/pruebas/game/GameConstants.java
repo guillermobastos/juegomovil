@@ -42,6 +42,8 @@ public class GameConstants {
      * Ancho de la pantalla
      */
     public static float ANCHO_PANTALLA = Gdx.graphics.getWidth();
+
+    public static float ESCALA = Gdx.graphics.getWidth()/Gdx.graphics.getHeight();
     public static final Color BLANCO = Color.WHITE;
     public static final Color ROSA = Color.PINK;
     public static final Color MARRON = Color.BROWN;
