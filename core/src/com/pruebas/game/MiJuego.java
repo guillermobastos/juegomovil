@@ -278,7 +278,7 @@ public class MiJuego extends Game {
 
 
         b2 = new Box2DDebugRenderer();
-//        b2.setDrawBodies(false);
+        b2.setDrawBodies(false);
         world.setContactListener(new ContactListener() {
 
             /**
