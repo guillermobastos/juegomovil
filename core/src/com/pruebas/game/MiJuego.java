@@ -3,6 +3,7 @@ package com.pruebas.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,7 +13,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -26,6 +26,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 
 import java.util.Locale;
 
@@ -48,6 +49,8 @@ public class MiJuego extends Game {
     // Para saber en que screen del juego se ha seleccionado
     static int gameState;
 
+    public int nivel;
+
     // Clase fondos para aplicar dichas imágenes
     Fondos fondos;
     InputAdapter procesadorEntradaMenu;
@@ -59,7 +62,7 @@ public class MiJuego extends Game {
     Array<Texture> textures1, textures2;
 
     // activar o desactiva propiedades y el fondo de dia o de noche
-    boolean isDia, idioma_es, isTutorial, sonido;
+    boolean isDia, idioma_es, isTutorial, isSonido, isVibracion;
 
     // Colección de los records
     public static Array<Double> records = new Array<>();
@@ -72,10 +75,13 @@ public class MiJuego extends Game {
     public FileHandle baseFileHandle;
 
     // Sonidos para la muerte del personaje y al hacer click en cualquier botón
-    private Sound muerte, click;
+    private Sound muerte, click,vibracion;
 
     // Música de fondo
     private Music musica;
+
+    // Persistencia de datos
+    private Preferences preferences;
 
 
     @Override
@@ -95,8 +101,8 @@ public class MiJuego extends Game {
         viewport = new StretchViewport(10.8f, 7.2f, camera);
         world = new World(new Vector2(0, -50), true);
 
-        gameState = GameConstants.screenMapa;
-        isDia = sonido = idioma_es = true;
+        gameState = GameConstants.SCREEN_MAPA;
+        isDia = isSonido = idioma_es = isVibracion = true;
         isTutorial = false;
         personaje = new Personaje(200, 200, world);
         objeto = new Objeto(anchoPantalla, altoPantalla, world, this);
@@ -104,6 +110,8 @@ public class MiJuego extends Game {
         objetos.add(objeto);
 
         fondos.metros = 0;
+        nivel = 1;
+        preferences = Gdx.app.getPreferences("records");
         baseFileHandle = Gdx.files.internal("i18n/MyBundle");
         locale = idioma_es ? new Locale("es") : new Locale("en");
         myBundle = I18NBundle.createBundle(baseFileHandle, locale);
@@ -149,31 +157,40 @@ public class MiJuego extends Game {
                 screenY = Gdx.graphics.getHeight() - screenY;
 
                 // Menu
-                if (gameState == GameConstants.screenMenu) {
+                if (gameState == GameConstants.SCREEN_MENU) {
                     if (fondos.rJugar.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenPlay;
+                        Click();
+                        gameState = GameConstants.SCREEN_PLAY;
                     }
                     if (fondos.rPersonaje.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenPersonaje;
+                        Click();
+                        gameState = GameConstants.SCREEN_PERSONAJE;
                     }
                     if (fondos.rConfig.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenConfig;
+                        Click();
+                        gameState = GameConstants.SCREEN_CONFIG;
                     }
                     if (fondos.rMapa.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenMapa;
+                        Click();
+                        gameState = GameConstants.SCREEN_MAPA;
                     }
                     if (fondos.rRecord.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenRecord;
+                        Click();
+                        gameState = GameConstants.SCREEN_RECORD;
+                    }
+                    if (fondos.rTutorial.contains(screenX, screenY)) {
+                        Click();
+                        isTutorial = true;
+                        gameState = GameConstants.SCREEN_TUTORIAL;
+                    }
+                    if (fondos.rCreditos.contains(screenX, screenY)) {
+                        Click();
+                        gameState = GameConstants.SCREEN_CREDITOS;
                     }
 
                     // Mapa
-                } else if (gameState == GameConstants.screenMapa) {
-                    click.play();
+                } else if (gameState == GameConstants.SCREEN_MAPA) {
+                    Click();
                     if (screenX < anchoPantalla / 2) {
                         fondos.isDia = true;
                         animacionNoche.setVisible(false);
@@ -183,11 +200,11 @@ public class MiJuego extends Game {
                         animacionNoche.setVisible(true);
                         animacionDia.setVisible(false);
                     }
-                    gameState = GameConstants.screenMenu;
+                    gameState = GameConstants.SCREEN_MENU;
 
                     // Personaje
-                } else if (gameState == GameConstants.screenPersonaje) {
-                    click.play();
+                } else if (gameState == GameConstants.SCREEN_PERSONAJE) {
+                    Click();
                     if (screenX < anchoPantalla / 2) {
                         personaje.animation = personaje.animationNaranja;
                         personaje.isNaranja = true;
@@ -195,22 +212,18 @@ public class MiJuego extends Game {
                         personaje.animation = personaje.animationAzul;
                         personaje.isNaranja = false;
                     }
-                    gameState = GameConstants.screenMenu;
+                    gameState = GameConstants.SCREEN_MENU;
 
                     // Juego
-                } else if (gameState == GameConstants.screenPlay) {
-                    if (sonido) {
+                } else if (gameState == GameConstants.SCREEN_PLAY || gameState == GameConstants.SCREEN_TUTORIAL) {
+                    if (isSonido) {
                         musica.play();
                         musica.setLooping(true);
-                    }
-                    if (isTutorial && fondos.rVolver.contains(screenX, screenY)) {
-                        gameState = GameConstants.screenMenu;
-                        isTutorial = false;
                     }
                     if (personaje.death) {
                         musica.stop();
                         if (fondos.rVolverJugar.contains(screenX, screenY)) {
-                            click.play();
+                            Click();
                             personaje.death = false;
                             personaje.body.setTransform(200, 200, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
@@ -218,13 +231,13 @@ public class MiJuego extends Game {
                             actualizaAnimacion();
                         }
                         if (fondos.rSalir.contains(screenX, screenY)) {
-                            click.play();
-                            personaje.death = false;
+                            Click();
+                            personaje.death = isTutorial = false;
                             personaje.body.setTransform(200, 200, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
                             records.add(fondos.metros);
-                            gameState = GameConstants.screenMenu;
+                            gameState = GameConstants.SCREEN_MENU;
                             fondos.font.setColor(Color.WHITE);
                             actualizaAnimacion();
                         }
@@ -232,49 +245,40 @@ public class MiJuego extends Game {
                     }
 
                     // Record
-                } else if (gameState == GameConstants.screenRecord) {
-                    if (fondos.rVolver.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenMenu;
-                    }
+                } else if (gameState == GameConstants.SCREEN_RECORD) {
+                    ClickVolver(screenX,screenY);
 
                     // Config
-                } else if (gameState == GameConstants.screenConfig) {
+                } else if (gameState == GameConstants.SCREEN_CONFIG) {
                     if (fondos.rIdioma.contains(screenX, screenY)) {
-                        click.play();
+                        Click();
                         idioma_es = !idioma_es;
                         locale = idioma_es ? new Locale("es") : new Locale("en");
                         myBundle = I18NBundle.createBundle(baseFileHandle, locale);
                     }
                     if (fondos.rSonido.contains(screenX, screenY)) {
-                        click.play();
+                        Click();
                         musica.stop();
-                        sonido = !sonido;
+                        isSonido = !isSonido;
                     }
-                    if (fondos.rVolver.contains(screenX, screenY)) {
-                        click.play();
-                        gameState = GameConstants.screenMenu;
+                    if(fondos.rVibracion.contains(screenX,screenY)) {
+                        Click();
+                        isVibracion = !isVibracion;
                     }
+                    ClickVolver(screenX,screenY);
 
                     // Tutorial
-                } else if (gameState == GameConstants.screenTurorial) {
-                    if (fondos.rVolver.contains(screenX, screenY)) {
-                        gameState = GameConstants.screenMenu;
-                    }
-
-                    // Créditos
-                } else if (gameState == GameConstants.screenCreditos) {
-                    if (fondos.rVolver.contains(screenX, screenY)) {
-                        gameState = GameConstants.screenMenu;
-                    }
+                } else if (gameState == GameConstants.SCREEN_CREDITOS) {
+                    ClickVolver(screenX,screenY);
                 }
                 return true;
             }
         };
-
         Gdx.input.setInputProcessor(procesadorEntradaMenu);
+
+
         b2 = new Box2DDebugRenderer();
-//        b2.setDrawBodies(false);  // IMportante
+        b2.setDrawBodies(false);
         world.setContactListener(new ContactListener() {
 
             /**
@@ -286,10 +290,13 @@ public class MiJuego extends Game {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
 
-                if(fa.getBody().getUserData().equals("player") ||
+                if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
-                    if (sonido) {
+                    if (isSonido) {
                         muerte.play();
+                    }
+                    if(isVibracion) {
+                        vibracion.play();
                     }
                     Gdx.input.vibrate(800);
                     hit();
@@ -317,7 +324,7 @@ public class MiJuego extends Game {
     public void render() {
         switch (gameState) {
             // Pantalla de Juego
-            case GameConstants.screenPlay:
+            case GameConstants.SCREEN_PLAY:
                 world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
                 spriteBatch.begin();
                 Jugar();
@@ -326,17 +333,18 @@ public class MiJuego extends Game {
                 break;
 
             // Pantalla del Menú
-            case GameConstants.screenMenu:
+            case GameConstants.SCREEN_MENU:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                fondos.dibujarFondoMenu();
                 stage.act();
                 stage.draw();
+                fondos.dibujarFondoMenu();
+                fondos.dibujarSolOLuna();
                 spriteBatch.end();
                 break;
 
             // Pantalla de Configuración
-            case GameConstants.screenConfig:
+            case GameConstants.SCREEN_CONFIG:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 fondos.dibujarFondoConfig();
@@ -344,7 +352,7 @@ public class MiJuego extends Game {
                 break;
 
             // Pantalla de Records
-            case GameConstants.screenRecord:
+            case GameConstants.SCREEN_RECORD:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 fondos.dibujarFondoRecord(records);
@@ -352,7 +360,7 @@ public class MiJuego extends Game {
                 break;
 
             // Pantalla para escoger el fondo del Mapa
-            case GameConstants.screenMapa:
+            case GameConstants.SCREEN_MAPA:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 fondos.dibujarFondoMapa();
@@ -360,7 +368,7 @@ public class MiJuego extends Game {
                 break;
 
             // Pantalla para escoger el personaje
-            case GameConstants.screenPersonaje:
+            case GameConstants.SCREEN_PERSONAJE:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 fondos.dibujarFondoPersonaje();
@@ -368,10 +376,18 @@ public class MiJuego extends Game {
                 break;
 
             // Pantalla Tutorial
-            case GameConstants.screenTurorial:
+            case GameConstants.SCREEN_TUTORIAL:
+                world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 Jugar();
+                spriteBatch.end();
+                b2.render(world, camera.combined);
+                break;
+            case GameConstants.SCREEN_CREDITOS:
+                spriteBatch.begin();
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                fondos.dibujarFondoCreditos(GameConstants.CREDITOS_NOMBRES);
                 spriteBatch.end();
                 break;
         }
@@ -401,10 +417,13 @@ public class MiJuego extends Game {
             for (int i = 0; i < objetos.size; i++) {
                 objetos.get(i).update(-anchoPantalla / altoPantalla, -altoPantalla / altoPantalla, fondos.metros);
                 objetos.get(i).render(spriteBatch);
-                if(objetos.get(i).body.getPosition().x < 0 || objetos.get(i).body.getPosition().y < 0) {
+                if (objetos.get(i).body.getPosition().x < 0 || objetos.get(i).body.getPosition().y < 0) {
+                    world.destroyBody(objetos.get(i).body);
                     objetos.removeIndex(i);
+                    Gdx.app.log("Objetos", objetos.size+"");
                 }
             }
+            actualizacionNivel();
 
         } else {
             musica.stop();
@@ -460,15 +479,73 @@ public class MiJuego extends Game {
         }
     }
 
+    /**
+     * Actualiza el nivel del juego según los metros avanzados
+     */
+    public void actualizacionNivel() {
+        if (fondos.metros < 1000) {
+            nivel = 1;
+        } else if (fondos.metros < 2000) {
+            nivel = 2;
+        } else if (fondos.metros < 4000) {
+            nivel = 3;
+        } else if (fondos.metros < 6000) {
+            nivel = 4;
+        } else if (fondos.metros < 8500) {
+            nivel = 5;
+        } else {
+            nivel = 6;
+        }
+    }
+
+    /**
+     * Hace el sonido de clickar si en la configuración está activado
+     */
+    public void Click() {
+        if(isSonido) {
+            click.play();
+        }
+    }
+
+    /**
+     * Vuelve al menu principal una vez se clique en el botón de volver
+     * @param screenX posición x donde se pulsa
+     * @param screenY posición y donde se pulsa
+     */
+    public void ClickVolver(float screenX, float screenY) {
+        if (fondos.rVolver.contains(screenX, screenY)) {
+            Click();
+            gameState = GameConstants.SCREEN_MENU;
+        }
+    }
+
+    /**
+     * Guarda los datos de records en un archivo propio del juego
+     */
     @Override
     public void dispose() {
+        if (records.size > 0) {
+            for (int i = 0; i < records.size; i++) {
+                preferences.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
+            }
+        }
         spriteBatch.dispose();
         stage.dispose();
         fondos.font.dispose();
     }
 
+    /**
+     * Cambia las variables al cambiar de tamaño la pantalla
+     * @param width the new width in pixels
+     * @param height the new height in pixels
+     */
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        fondos.anchoPantalla = GameConstants.ANCHO_PANTALLA;
+        fondos.altoPantalla = GameConstants.ALTO_PANTALLA;
+        fondos.width = anchoPantalla/7;
+        fondos.height = altoPantalla/10;
+        fondos.espacio_entre_botones = anchoPantalla/15;
     }
 }

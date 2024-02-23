@@ -1,27 +1,67 @@
 package com.pruebas.game;
 
 import com.badlogic.gdx.Gdx;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class GameConstants {
 
+    /**
+     * Define el intervalo de tiempo entre cada iteración de la simulación física
+     */
     public static final float TIMESTEP = 1.0f / 60.0f;
+
+    /**
+     * Especifica cuántas veces se iterará para resolver las velocidades
+     * de los cuerpos físicos en cada paso de tiempo.
+     */
     public static final int VELOCITY_ITERATIONS = 8;
+
+    /**
+     *  Determina cuántas veces se iterará para resolver las posiciones
+     *  de los cuerpos físicos en cada paso de tiempo
+     */
     public static final int POSITION_ITERATIONS = 3;
-    public static final int screenMenu = 1;
-    public static final int screenPlay = 2;
-    public static final int screenConfig = 3;
-    public static final int screenRecord = 4;
-    public static final int screenMapa = 5;
-    public static final int screenPersonaje = 6;
-    public static final int screenTurorial = 7;
-    public static final int screenCreditos = 8;
-    public static  final float altoPantalla = Gdx.graphics.getHeight();
-    public static  final float anchoPantalla = Gdx.graphics.getWidth();
+    public static final int SCREEN_MENU = 1;
+    public static final int SCREEN_PLAY = 2;
+    public static final int SCREEN_CONFIG = 3;
+    public static final int SCREEN_RECORD = 4;
+    public static final int SCREEN_MAPA = 5;
+    public static final int SCREEN_PERSONAJE = 6;
+    public static final int SCREEN_TUTORIAL = 7;
+    public static final int SCREEN_CREDITOS = 8;
 
-    public static final String [] creditosNombres = {"Guillermo Bastos","Javier Cousido", "Nicolás Fernández"};
+    /**
+     * Alto de la pantalla
+     */
+    public static float ALTO_PANTALLA = Gdx.graphics.getHeight();
 
+    /**
+     * Ancho de la pantalla
+     */
+    public static float ANCHO_PANTALLA = Gdx.graphics.getWidth();
+    public static final Color BLANCO = Color.WHITE;
+    public static final Color ROSA = Color.PINK;
+    public static final Color MARRON = Color.BROWN;
+    public static final Color AMARILLO = Color.YELLOW;
+    public static final Color NARANJA = Color.ORANGE;
+    public static final Color ROJO = Color.RED;
 
+    /**
+     * Colección colores para determinar el nivel
+     */
+    public static final Color[] COLORES = {BLANCO, ROSA, MARRON, AMARILLO, NARANJA, ROJO};
+
+    /**
+     * Lista de personas que han participado en el proyecto
+     */
+    public static final String [] CREDITOS_NOMBRES = {
+            "Programador: Guillermo Bastos",
+            "Beta Tester: Javier Cousido",
+            "Analista programador: Nicolás Fernández",
+            "Analista programadora: Laura",
+            "Asesor: Adrián"
+    };
 }

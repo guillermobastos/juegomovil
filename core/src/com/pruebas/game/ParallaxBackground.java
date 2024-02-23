@@ -7,14 +7,49 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
 public class ParallaxBackground extends Actor {
+
+    /**
+     * Variable que lleva la cuenta del desplazamiento horizontal
+     */
     private int scroll;
+
+    /**
+     * Un array de texturas que representan las diferentes capas del fondo.
+     */
     private Array<Texture> layers;
+
+    /**
+     * Constante que define la diferencia de velocidad entre las capas del fondo
+     */
     private final int LAYER_SPEED_DIFFERENCE = 1;
+
+    /**
+     *  Variables que controlan la posición, tamaño, escala, origen,
+     *  rotación y volteo de las texturas al dibujarlas.
+     */
     float x,y,width,heigth,scaleX,scaleY;
+
+    /**
+     *  Variables que controlan la posición y origen
+     */
     int originX, originY,rotation,srcX,srcY;
+
+    /**
+     *  Variables volteo de las texturas al dibujarlas
+     */
     boolean flipX,flipY;
+
+    /**
+     *  La velocidad de desplazamiento del fondo
+     */
     private int speed;
 
+    /**
+     * Constructor de la clase que recibe un array de texturas como parámetro.
+     * Configura las texturas para que se repitan en modo espejo y establece
+     * algunos valores por defecto para las variables de posición y escala.
+     * @param textures
+     */
     public ParallaxBackground(Array<Texture> textures){
         layers = textures;
         for(int i = 0; i <textures.size;i++){
@@ -34,6 +69,15 @@ public class ParallaxBackground extends Actor {
         this.speed = newSpeed;
     }
 
+    /**
+     *  Método que dibuja el fondo.
+     *  Ajusta el color del lote (batch), actualiza el desplazamiento horizontal según la velocidad y
+     *  luego dibuja cada capa del fondo en función de su posición de desplazamiento y
+     *  la diferencia de velocidad entre capas.
+     * @param batch lienzo
+     * @param parentAlpha The parent alpha, to be multiplied with this actor's alpha, allowing the parent's alpha to affect all
+     *           children.
+     */
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.setColor(getColor().r, getColor().g, getColor().b, getColor().a * parentAlpha);

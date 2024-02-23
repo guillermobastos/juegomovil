@@ -26,13 +26,29 @@ public class Personaje {
     TextureRegion currentFrame;
     float cont = 0;
 
-    // Ancho y alto de la imagen y body del personaje
+    /**
+     * Ancho y alto de la imagen y body del personaje
+     */
     public static int anchoPersonaje,altoPersonaje;
+
+    /**
+     * BodyDef del personaje
+     */
     BodyDef bodyDef;
+
+    /**
+     * cuerpo del personaje
+     */
     Body body;
 
-    // Controla el color del personaje
+    /**
+     * Controla el color del personaje
+     */
     boolean isNaranja = true;
+
+    /**
+     * Controla si el personaje está muerto
+     */
     boolean death;
 
     /**
@@ -87,8 +103,8 @@ public class Personaje {
         position = new Vector2(x, y);
         death = false;
         animation = animationNaranja;
-        anchoPersonaje = (new Texture(Gdx.files.internal("personaje_naranja_0.png"))).getWidth();
-        altoPersonaje = (new Texture(Gdx.files.internal("personaje_naranja_0.png"))).getHeight();
+        anchoPersonaje = (int)GameConstants.ANCHO_PANTALLA/18;
+        altoPersonaje = (int)GameConstants.ALTO_PANTALLA/10;
 
         bodyDef = new BodyDef();
         bodyDef.fixedRotation = true;
@@ -97,7 +113,7 @@ public class Personaje {
 
         body = world.createBody(bodyDef);
         PolygonShape ps = new PolygonShape();
-        ps.setAsBox(anchoPersonaje / 2, altoPersonaje / 2);;
+        ps.setAsBox(anchoPersonaje / 2, altoPersonaje / 2 -10);
         body.setUserData("player");
 
         FixtureDef fixtureDef = new FixtureDef();

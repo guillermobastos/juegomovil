@@ -9,27 +9,72 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Objeto {
+
+    /**
+     * Posición del objeto
+     */
     Vector2 position;
+
+    /**
+     * Animación del objeto
+     */
     Animation proyectil;
+
+    /**
+     * Imagen de la bola de fuego
+     */
     Texture bolaFuego;
+
+    /**
+     * Número random para la creación aleatoria de los objetos
+     */
     int random;
+
+    /**
+     * Contador para cambiar los frames
+     */
     int cont = 0;
+
+    /**
+     * Ancho y alto del objeto
+     */
     int anchoObjeto, altoObjeto;
+
+    /**
+     * Bodydef del objeto
+     */
     BodyDef bodyDef;
-    World world;
+
+    /**
+     * Body del objeto
+     */
     Body body;
+
+    /**
+     * Mundo donde se va a crear el objeto
+     */
+    World world;
+
+    /**
+     * Frame actual de la animación
+     */
     TextureRegion currentFrame;
+
+    /**
+     * Juego Principal
+     */
     MiJuego miJuego;
 
-    boolean isBolaFuego;
 
-    boolean isCohete, isFlecha;
+    /**
+     * Control para saber qué tipo de proyectil es el objeto
+     */
+    boolean isCohete, isFlecha,isBolaFuego;
 
     /**
      * Crea un nuevo objeto aleatorio entre los posibles de la clase Objeto
@@ -47,9 +92,9 @@ public class Objeto {
         bodyDef.fixedRotation = true;
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         if (isBolaFuego) {
-            x = (float) (Math.random() * (GameConstants.anchoPantalla - anchoObjeto) + anchoObjeto / 2);
-            position = new Vector2(x, GameConstants.altoPantalla);
-            bodyDef.position.set(x, GameConstants.altoPantalla);
+            x = (float) (Math.random() * (GameConstants.ANCHO_PANTALLA - anchoObjeto) + anchoObjeto / 2);
+            position = new Vector2(x, GameConstants.ALTO_PANTALLA);
+            bodyDef.position.set(x, GameConstants.ALTO_PANTALLA);
         } else {
             position = new Vector2(x, y);
             bodyDef.position.set(x, y);
@@ -60,9 +105,9 @@ public class Objeto {
         if (isCohete) {
             ps.setAsBox(anchoObjeto / 2, altoObjeto / 2 - 25);
         } else if (isFlecha) {
-            ps.setAsBox(anchoObjeto / 2-15, altoObjeto / 2 - 15);
+            ps.setAsBox(anchoObjeto / 2 - 15, altoObjeto / 2 - 15);
         } else if (isBolaFuego) {
-            ps.setAsBox(anchoObjeto / 2, altoObjeto / 2 );
+            ps.setAsBox(anchoObjeto / 2, altoObjeto / 2);
         }
         FixtureDef fixtureDef = new FixtureDef();
         body.setUserData("objeto");
@@ -90,8 +135,8 @@ public class Objeto {
                         new Sprite(new Texture(Gdx.files.internal("cohete_0.png"))),
                         new Sprite(new Texture(Gdx.files.internal("cohete_1.png")))
                 });
-                anchoObjeto = (new Texture(Gdx.files.internal("cohete_0.png"))).getWidth();
-                altoObjeto = (new Texture(Gdx.files.internal("cohete_0.png"))).getHeight();
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 18;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 14;
                 isCohete = true;
                 isBolaFuego = false;
                 break;
@@ -100,15 +145,15 @@ public class Objeto {
                         new Sprite(new Texture(Gdx.files.internal("flecha_0.png"))),
                         new Sprite(new Texture(Gdx.files.internal("flecha_1.png")))
                 });
-                anchoObjeto = (new Texture(Gdx.files.internal("flecha_0.png"))).getWidth();
-                altoObjeto = (new Texture(Gdx.files.internal("flecha_1.png"))).getHeight();
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 14;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 13;
                 isFlecha = true;
                 isBolaFuego = false;
                 break;
             case 3:
                 bolaFuego = new Texture(Gdx.files.internal("bola_de_fuego.png"));
-                anchoObjeto = bolaFuego.getWidth();
-                altoObjeto = bolaFuego.getHeight();
+                anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 8;
+                altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 8;
                 isBolaFuego = true;
                 break;
         }
@@ -125,15 +170,14 @@ public class Objeto {
             body.setTransform(new Vector2(body.getPosition().x + 2 * x, body.getPosition().y + 2 * y), 0);
         }
         if (isFlecha) {
-            if (body.getPosition().x < GameConstants.anchoPantalla / 2) {
+            if (body.getPosition().x < GameConstants.ANCHO_PANTALLA / 2) {
                 body.setTransform(new Vector2(body.getPosition().x + x, body.getPosition().y + 1.5f * y), 0);
             } else {
                 body.setTransform(new Vector2(body.getPosition().x + (1.5f * x), body.getPosition().y + y), 0);
             }
         }
         if (isBolaFuego) {
-//            body.setTransform(new Vector2(body.getPosition().x, body.getPosition().y + 2 * y), 0);
-            body.setTransform(new Vector2(body.getPosition().x, body.getPosition().y + 0.4f * y), 0);
+            body.setTransform(new Vector2(body.getPosition().x, body.getPosition().y + 1f * y), 0);
         }
     }
 
@@ -146,9 +190,8 @@ public class Objeto {
         if (isBolaFuego) {
             batch.draw(bolaFuego, body.getPosition().x - (anchoObjeto / 2) - 10, body.getPosition().y - (altoObjeto / 2));
         } else if (isFlecha) {
-            batch.draw(currentFrame, body.getPosition().x - (anchoObjeto / 2) - 10, body.getPosition().y - (altoObjeto / 2) - 10);
+            batch.draw(currentFrame, body.getPosition().x - (anchoObjeto / 2) - 10, body.getPosition().y - (altoObjeto / 2) - 18);
         } else if (isCohete) {
-//            batch.draw(currentFrame, body.getPosition().x - (anchoObjeto / 2) - 10, body.getPosition().y - (altoObjeto / 2) - 10);
             batch.draw(currentFrame, body.getPosition().x - (anchoObjeto / 2) - 10, body.getPosition().y - (altoObjeto / 2) - 10);
         }
     }
@@ -165,12 +208,11 @@ public class Objeto {
         cont++;
         if (!isBolaFuego) {
             currentFrame = (TextureRegion) proyectil.getKeyFrame(cont, true);
-            move(x * 2, y);
+            move(x * 2 - miJuego.nivel, y - miJuego.nivel);
         } else {
-            move(x, y);
+            move(x - miJuego.nivel, y - miJuego.nivel);
         }
     }
-
 
     /**
      * Dependiendo de la posición de los objetos visibles se crean nuevos
@@ -180,9 +222,10 @@ public class Objeto {
      * @param metros metros actuales que lleva el personaje recorridos
      */
     public void creaNuevoObjeto(float x, float y, double metros) {
-        if (metros % 100 == 0 && (x > 0 && y > 0)) {
+        int nivel = miJuego.nivel;
+        if (metros % (100 - nivel * 7) == 0 && (x > 0 && y > 0)) {
             miJuego.fondos.metros++;
-            Objeto nuevoObjeto = new Objeto(GameConstants.anchoPantalla, GameConstants.altoPantalla, world, miJuego);
+            Objeto nuevoObjeto = new Objeto(GameConstants.ANCHO_PANTALLA, GameConstants.ALTO_PANTALLA, world, miJuego);
             miJuego.objetos.add(nuevoObjeto);
         }
     }
