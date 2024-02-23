@@ -31,11 +31,26 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.Locale;
 
 public class MiJuego extends Game {
+
+    /**
+     *  clase que representa una cámara
+     *  con proyección ortográfica en un entorno tridimensional
+     */
     public OrthographicCamera camera;
+
+    /**
+     *  Clase en LibGDX que se utiliza para renderizar gráficos en 2D
+     */
     SpriteBatch spriteBatch;
 
-    // Personaje del videojuego
+    /**
+     * Personaje del videojuego
+     */
     Personaje personaje;
+
+    /**
+     * Proyectil
+     */
     Objeto objeto;
 
     // Colección de todos los proyectiles visibles
@@ -43,44 +58,91 @@ public class MiJuego extends Game {
 
     // Alto y ancho de la pantalla
     float altoPantalla, anchoPantalla;
+
+    /**
+     *  Clase en LibGDX que se utiliza
+     *  para renderizar visualmente el mundo físico creado con Box2D
+     */
     Box2DDebugRenderer b2;
+
+    /**
+     *  Se utiliza para crear y simular el mundo físico en un juego 2D.
+     */
     World world;
 
     // Para saber en que screen del juego se ha seleccionado
     static int gameState;
 
+    /**
+     * Nivel del juego
+     */
     public int nivel;
 
-    // Clase fondos para aplicar dichas imágenes
+    /**
+     * Clase fondos para aplicar dichas imágenes
+     */
     Fondos fondos;
+
+    /**
+     * clase en LibGDX que proporciona una forma conveniente
+     * de manejar eventos de entrada en un juego o aplicación
+     */
     InputAdapter procesadorEntradaMenu;
 
-    // Animaciones de Dia y de Noche
+    /**
+     * Animaciones de Dia y de Noche
+     */
     ParallaxBackground animacionDia, animacionNoche;
 
-    // Colección de imágenes para el fondo: fondo de dia y de noche
+    /**
+     * Colección de imágenes para el fondo: fondo de dia y de noche
+     */
     Array<Texture> textures1, textures2;
 
-    // activar o desactiva propiedades y el fondo de dia o de noche
+    /**
+     * Activa o desactiva propiedades y el fondo de dia o de noche
+     */
     boolean isDia, idioma_es, isTutorial, isSonido, isVibracion;
 
-    // Colección de los records
+    /**
+     * Colección de los records
+     */
     public static Array<Double> records = new Array<>();
+
+    /**
+     * Clase que define una región visible del mundo del juego y
+     * cómo se mapea esta región al área de la pantalla
+     */
     Viewport viewport;
+
+    /**
+     * Clase que representa un contenedor para actores y
+     * maneja la renderización y el manejo de eventos
+     * de estos actores en una escena
+     */
     private Stage stage;
 
-    // Uso para la traducción entre inglés y español
+    /**
+     * Uso para la traducción entre inglés y español
+     */
     public I18NBundle myBundle;
     public Locale locale;
     public FileHandle baseFileHandle;
 
-    // Sonidos para la muerte del personaje y al hacer click en cualquier botón
+    /**
+     * Sonidos para la muerte del personaje y
+     * al hacer click en cualquier botón
+     */
     private Sound muerte, click;
 
-    // Música de fondo
+    /**
+     * Música de fondo
+     */
     private Music musica;
 
-    // Persistencia de datos
+    /**
+     * Persistencia de datos
+     */
     private Preferences preferences;
 
 
