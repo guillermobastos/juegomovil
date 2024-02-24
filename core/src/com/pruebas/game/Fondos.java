@@ -217,12 +217,12 @@ public class Fondos {
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_derecho"), espacio_entre_botones, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_izquierdo"), anchoPantalla * 3 / 4, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         if (metros < 200) {
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_esquiva"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 10, true);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_esquiva"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 4, 10, true);
         } else if (metros < 700) {
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_sobrevive"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 50, true);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_sobrevive"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 4, 50, true);
         } else {
             font.getData().setScale(2.50F);
-            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_completado"), anchoPantalla / 2, altoPantalla - espacio_entre_botones, anchoPantalla / 3, 100, false);
+            font.draw(spriteBatch, miJuego.myBundle.get("tutorial_completado"), anchoPantalla *5/ 12, altoPantalla - espacio_entre_botones, anchoPantalla / 4, 100, false);
             font.getData().setScale(1);
         }
     }

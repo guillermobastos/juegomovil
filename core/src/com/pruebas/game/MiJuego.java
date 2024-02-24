@@ -358,9 +358,8 @@ public class MiJuego extends Game {
                         muerte.play();
                     }
                     if(isVibracion) {
-                        Gdx.input.vibrate(400);
+                        Gdx.input.vibrate(800);
                     }
-                    Gdx.input.vibrate(800);
                     hit();
                 }
             }

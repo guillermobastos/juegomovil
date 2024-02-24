@@ -34,6 +34,10 @@ android {
 }
 
 //dependencies {
+//    implementation fileTree(dir: 'C:\\Users\\Usuario\\AppData\\Local\\Android\\Sdk\\platforms\\android-33', include: ['*.aar', '*.jar'], exclude: [])
+//}
+
+//dependencies {
 //    implementation fileTree(dir: 'C:\\Users\\guille\\AppData\\Local\\Android\\Sdk\\platforms\\android-34', include: ['*.aar', '*.jar'], exclude: [])
 //}
 
