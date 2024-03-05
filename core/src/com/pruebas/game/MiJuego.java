@@ -397,7 +397,6 @@ public class MiJuego extends Game {
                         hit();
                     } else {
                         personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
-                        world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
                     }
                 }
             }
@@ -411,7 +410,6 @@ public class MiJuego extends Game {
                         fb.getBody().getUserData().equals("player")) {
                     vidas--;
                 }
-
             }
 
             @Override
@@ -631,7 +629,7 @@ public class MiJuego extends Game {
     }
 
     /**
-     * Guarda los datos de records en un archivo propio del juego
+     * Cuando la aplicación se cierra
      */
     @Override
     public void dispose() {
