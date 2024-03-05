@@ -375,7 +375,7 @@ public class MiJuego extends Game {
 
 
         b2 = new Box2DDebugRenderer();
-//        b2.setDrawBodies(false);
+        b2.setDrawBodies(false);
         world.setContactListener(new ContactListener() {
 
             /**
@@ -396,8 +396,6 @@ public class MiJuego extends Game {
                     }
                     if (vidas <= 0) {
                         hit();
-                    } else {
-                        personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
                     }
                 }
             }
@@ -430,6 +428,8 @@ public class MiJuego extends Game {
      */
     @Override
     public void render() {
+spriteBatch=new SpriteBatch();
+fondos.spriteBatch=spriteBatch;
         switch (gameState) {
 
             // Pantalla de Juego
@@ -500,6 +500,7 @@ public class MiJuego extends Game {
                 spriteBatch.end();
                 break;
         }
+        dispose();
     }
 
 
@@ -530,7 +531,6 @@ public class MiJuego extends Game {
                 if (objetos.get(i).body.getPosition().x < 0 || objetos.get(i).body.getPosition().y < 0) {
                     world.destroyBody(objetos.get(i).body);
                     objetos.removeIndex(i);
-                    Gdx.app.log("Objetos", objetos.size + "");
                 }
             }
             actualizacionNivel();
@@ -551,6 +551,11 @@ public class MiJuego extends Game {
      * Gestiona el movimiento del personaje
      */
     public void procesarEntrada() {
+        if(Gdx.input.getAccelerometerX() > 5) {
+            personaje.move(0,2);
+        } else {
+            personaje.move(0,-1);
+        }
         if (Gdx.input.isTouched() && !personaje.death) {
             if (Gdx.input.getX() < anchoPantalla / 2) {
                 personaje.move(-5, 3);
@@ -637,8 +642,7 @@ public class MiJuego extends Game {
     @Override
     public void dispose() {
         spriteBatch.dispose();
-        stage.dispose();
-        fondos.font.dispose();
+        fondos.textureAtlas.dispose();
     }
 
     /**

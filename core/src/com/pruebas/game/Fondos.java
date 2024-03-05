@@ -80,8 +80,6 @@ public class Fondos {
      * @param spriteBatch lienzo donde se va a dibujar
      */
     public Fondos(Batch spriteBatch, MiJuego miJuego) {
-//        font = new BitmapFont(Gdx.files.internal("fast99.fnt"));
-//        font.getData().setScale(4);
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
         font.setColor(Color.WHITE);
         this.miJuego = miJuego;
