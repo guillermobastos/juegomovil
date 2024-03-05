@@ -389,8 +389,7 @@ public class MiJuego extends Game {
                     if (vidas == 0) {
                         hit();
                     } else {
-                        personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
-                        personaje.position.set(personaje.body.getPosition().x,personaje.body.getPosition().y);
+                        personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
                     }
                     vidas--;
                 }
