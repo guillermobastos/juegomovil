@@ -394,7 +394,7 @@ public class MiJuego extends Game {
                     if (isVibracion) {
                         Gdx.input.vibrate(800);
                     }
-                    if (vidas == 0) {
+                    if (vidas <= 0) {
                         hit();
                     } else {
                         personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
