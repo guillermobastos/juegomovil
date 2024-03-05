@@ -68,6 +68,6 @@ public class GameConstants {
      */
     public static final String [] CREDITOS_NOMBRES_MUSICA = {
             "Alex daiz",
-            "Maria dri",
+            "Pixabay.com",
     };
 }
