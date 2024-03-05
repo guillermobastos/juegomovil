@@ -380,7 +380,6 @@ public class MiJuego extends Game {
 
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
-                    vidas--;
                     if (isSonido) {
                         muerte.play();
                     }
@@ -392,6 +391,7 @@ public class MiJuego extends Game {
                     } else {
                         personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
                     }
+                    vidas--;
                 }
             }
 
