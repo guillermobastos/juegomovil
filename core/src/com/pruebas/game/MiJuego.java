@@ -385,7 +385,7 @@ public class MiJuego extends Game {
             public void beginContact(Contact contact) {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
-                Gdx.app.log("Vidas", vidas+"");
+                Gdx.app.log("Vidas", vidas + "");
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
                     if (isSonido) {
@@ -400,12 +400,19 @@ public class MiJuego extends Game {
                         personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
                         world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
                     }
-                    vidas--;
                 }
             }
 
             @Override
             public void endContact(Contact contact) {
+                Fixture fa = contact.getFixtureA();
+                Fixture fb = contact.getFixtureB();
+                Gdx.app.log("Vidas", vidas + "");
+                if (fa.getBody().getUserData().equals("player") ||
+                        fb.getBody().getUserData().equals("player")) {
+                    vidas--;
+                }
+
             }
 
             @Override
