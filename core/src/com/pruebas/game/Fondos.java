@@ -249,12 +249,12 @@ public class Fondos {
         dibujarFondo();
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 42);
         font.getData().setScale(1.5f);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")+ " "+ String.format(miJuego.myBundle.get("gracias")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_EQUIPO.length; i++) {
-            font.draw(spriteBatch, String.format("%s", nombres[i]), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones * 2 / 3));
+            font.draw(spriteBatch, String.format("%s", nombres[i]), anchoPantalla / 3 - espacio_entre_botones / 4, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones * 2 / 3));
         }
         dibujarBotonVolver();
-        font.getData().setScale(2.5f);
+//        font.getData().setScale(2.5f);
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
     }
 
@@ -391,6 +391,9 @@ public class Fondos {
     }
 
 
+    /**
+     * Dibuja las vidas restantes del personaje
+     */
     public void dibujarVidas() {
         for (int i = 0; i < miJuego.vidas; i++) {
             spriteBatch.draw(vidas, anchoPantalla / 8 + (i + 1) * vidas.getWidth()*1.2f, altoPantalla - vidas.getHeight() * 1.2f);

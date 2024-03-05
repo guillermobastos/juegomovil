@@ -649,6 +649,8 @@ public class MiJuego extends Game {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
+        altoPantalla = height;
+        anchoPantalla = width;
         fondos.anchoPantalla = GameConstants.ANCHO_PANTALLA;
         fondos.altoPantalla = GameConstants.ALTO_PANTALLA;
         fondos.width = anchoPantalla / 7;
