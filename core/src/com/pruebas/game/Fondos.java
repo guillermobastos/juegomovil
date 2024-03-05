@@ -257,7 +257,6 @@ public class Fondos {
             font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla / 2 + espacio_entre_botones / 2+espacio_entre_botones, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
         }
         dibujarBotonVolver();
-//        font.getData().setScale(2.5f);
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
     }
 

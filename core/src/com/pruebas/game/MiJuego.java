@@ -107,7 +107,7 @@ public class MiJuego extends Game {
     /**
      * Activa o desactiva propiedades y el fondo de dia o de noche
      */
-    boolean isDia, idioma_es, isTutorial, isSonido, isVibracion;
+    boolean isDia, idioma_es, isTutorial, isSonido, isVibracion, isTouched;
 
     /**
      * Colección de los records
@@ -176,7 +176,7 @@ public class MiJuego extends Game {
         gameState = GameConstants.SCREEN_MENU;
         isDia = isSonido = idioma_es = isVibracion = true;
         isTutorial = false;
-        personaje = new Personaje(200, 200, world);
+        personaje = new Personaje(anchoPantalla / 8, altoPantalla / 5, world);
         objeto = new Objeto(anchoPantalla, altoPantalla, world, this);
         objetos = new Array<>();
         objetos.add(objeto);
@@ -184,6 +184,7 @@ public class MiJuego extends Game {
         fondos.metros = 0;
         nivel = 1;
         vidas = 3;
+        isTouched = false;
 
         // Persistencia de los records
         prefRecords = Gdx.app.getPreferences("records");
@@ -322,8 +323,8 @@ public class MiJuego extends Game {
                             if (records.size > 0) {
                                 for (int i = 0; i < records.size && i < 10; i++) {
                                     prefRecords.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
+                                    prefRecords.flush();
                                 }
-                                prefRecords.flush();
                             }
                             personaje.death = isTutorial = false;
                             vidas = 3;
@@ -406,11 +407,12 @@ public class MiJuego extends Game {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
                 Gdx.app.log("Vidas", vidas + "");
-                Gdx.app.log("User data a",  fa.getBody().getUserData()+ "");
-                Gdx.app.log("User data b",  fb.getBody().getUserData()+ "");
+                Gdx.app.log("User data a", fa.getBody().getUserData() + "");
+                Gdx.app.log("User data b", fb.getBody().getUserData() + "");
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
-                    vidas--;
+
+//                    vidas--;
                 }
             }
 
