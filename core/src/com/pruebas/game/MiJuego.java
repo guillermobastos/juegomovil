@@ -319,6 +319,12 @@ public class MiJuego extends Game {
                         }
                         if (fondos.rSalir.contains(screenX, screenY)) {
                             Click();
+                            if (records.size > 0) {
+                                for (int i = 0; i < records.size && i < 10; i++) {
+                                    prefRecords.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
+                                }
+                                prefRecords.flush();
+                            }
                             personaje.death = isTutorial = false;
                             vidas = 3;
                             personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
@@ -343,6 +349,8 @@ public class MiJuego extends Game {
                         idioma_es = !idioma_es;
                         locale = idioma_es ? new Locale("es") : new Locale("en");
                         myBundle = I18NBundle.createBundle(baseFileHandle, locale);
+                        prefIdioma.putBoolean("idioma", idioma_es);
+                        prefIdioma.flush();
                     }
                     if (fondos.rSonido.contains(screenX, screenY)) {
                         Click();
@@ -620,14 +628,6 @@ public class MiJuego extends Game {
      */
     @Override
     public void dispose() {
-        if (records.size > 0) {
-            for (int i = 0; i < records.size; i++) {
-                prefRecords.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
-            }
-            prefRecords.flush();
-        }
-        prefIdioma.putBoolean("idioma", idioma_es);
-        prefIdioma.flush();
         spriteBatch.dispose();
         stage.dispose();
         fondos.font.dispose();
