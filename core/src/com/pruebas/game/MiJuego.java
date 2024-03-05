@@ -390,6 +390,7 @@ public class MiJuego extends Game {
                         hit();
                     } else {
                         personaje.body.setTransform(new Vector2(anchoPantalla / 5, altoPantalla / 5), 0);
+                        world.step(GameConstants.TIMESTEP, GameConstants.VELOCITY_ITERATIONS, GameConstants.POSITION_ITERATIONS);
                     }
                     vidas--;
                 }
