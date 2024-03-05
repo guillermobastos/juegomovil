@@ -33,13 +33,13 @@ import java.util.Locale;
 public class MiJuego extends Game {
 
     /**
-     *  clase que representa una cámara
-     *  con proyección ortográfica en un entorno tridimensional
+     * clase que representa una cámara
+     * con proyección ortográfica en un entorno tridimensional
      */
     public OrthographicCamera camera;
 
     /**
-     *  Clase en LibGDX que se utiliza para renderizar gráficos en 2D
+     * Clase en LibGDX que se utiliza para renderizar gráficos en 2D
      */
     SpriteBatch spriteBatch;
 
@@ -60,13 +60,13 @@ public class MiJuego extends Game {
     float altoPantalla, anchoPantalla;
 
     /**
-     *  Clase en LibGDX que se utiliza
-     *  para renderizar visualmente el mundo físico creado con Box2D
+     * Clase en LibGDX que se utiliza
+     * para renderizar visualmente el mundo físico creado con Box2D
      */
     Box2DDebugRenderer b2;
 
     /**
-     *  Se utiliza para crear y simular el mundo físico en un juego 2D.
+     * Se utiliza para crear y simular el mundo físico en un juego 2D.
      */
     World world;
 
@@ -77,6 +77,11 @@ public class MiJuego extends Game {
      * Nivel del juego
      */
     public int nivel;
+
+    /**
+     * Vidas del personaje
+     */
+    public int vidas;
 
     /**
      * Clase fondos para aplicar dichas imágenes
@@ -141,9 +146,14 @@ public class MiJuego extends Game {
     private Music musica;
 
     /**
-     * Persistencia de datos
+     * Persistencia de records
      */
-    private Preferences preferences;
+    private Preferences prefRecords;
+
+    /**
+     * Persistencia de idioma
+     */
+    private Preferences prefIdioma;
 
 
     @Override
@@ -153,9 +163,9 @@ public class MiJuego extends Game {
         altoPantalla = Gdx.graphics.getHeight();
         anchoPantalla = Gdx.graphics.getWidth();
         fondos = new Fondos(spriteBatch, this);
-        musica = Gdx.audio.newMusic(Gdx.files.internal("musica_fondo.mp3"));
-        click = Gdx.audio.newSound(Gdx.files.internal("click.mp3"));
-        muerte = Gdx.audio.newSound(Gdx.files.internal("sonido_muerte.mp3"));
+        musica = Gdx.audio.newMusic(Gdx.files.internal("sonidos/musica_fondo.mp3"));
+        click = Gdx.audio.newSound(Gdx.files.internal("sonidos/click.mp3"));
+        muerte = Gdx.audio.newSound(Gdx.files.internal("sonidos/sonido_muerte.mp3"));
         stage = new Stage(new ScreenViewport());
         camera = (OrthographicCamera) stage.getViewport().getCamera();
         camera = new OrthographicCamera();
@@ -173,7 +183,20 @@ public class MiJuego extends Game {
 
         fondos.metros = 0;
         nivel = 1;
-        preferences = Gdx.app.getPreferences("records");
+        vidas = 3;
+
+        // Persistencia de los records
+        prefRecords = Gdx.app.getPreferences("records");
+        if (prefRecords.get().size() > 0) {
+            for (int i = 0; i < prefRecords.get().size(); i++) {
+                records.add((double) prefRecords.getFloat("records" + i));
+            }
+        }
+        // Persistencia del idioma
+        prefIdioma = Gdx.app.getPreferences("idioma");
+        if (prefIdioma.get().size() > 0) {
+            idioma_es = prefIdioma.getBoolean("idioma");
+        }
         baseFileHandle = Gdx.files.internal("i18n/MyBundle");
         locale = idioma_es ? new Locale("es") : new Locale("en");
         myBundle = I18NBundle.createBundle(baseFileHandle, locale);
@@ -181,13 +204,13 @@ public class MiJuego extends Game {
         // Fondo del screenPlay del dia soleado
         textures1 = new Array<Texture>();
         for (int i = 1; i < 2; i++) {
-            textures1.add(new Texture(Gdx.files.internal("background_cielo_" + i + ".png")));
+            textures1.add(new Texture(Gdx.files.internal("fondos/background_cielo_" + i + ".png")));
             textures1.get(textures1.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         // Fondo del screenPlay de noche
         textures2 = new Array<Texture>();
         for (int i = 1; i < 2; i++) {
-            textures2.add(new Texture(Gdx.files.internal("background_noche_" + i + ".png")));
+            textures2.add(new Texture(Gdx.files.internal("fondos/background_noche_" + i + ".png")));
             textures2.get(textures2.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         animacionDia = new ParallaxBackground(textures1);
@@ -204,6 +227,7 @@ public class MiJuego extends Game {
          * Procesa las pulsaciones en el juego
          */
         procesadorEntradaMenu = new InputAdapter() {
+
             @Override
             public boolean keyDown(int keycode) {
                 return true;
@@ -287,7 +311,8 @@ public class MiJuego extends Game {
                         if (fondos.rVolverJugar.contains(screenX, screenY)) {
                             Click();
                             personaje.death = false;
-                            personaje.body.setTransform(200, 200, 0);
+                            vidas = 3;
+                            personaje.body.setTransform(anchoPantalla/10, altoPantalla/10, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
                             actualizaAnimacion();
@@ -295,7 +320,8 @@ public class MiJuego extends Game {
                         if (fondos.rSalir.contains(screenX, screenY)) {
                             Click();
                             personaje.death = isTutorial = false;
-                            personaje.body.setTransform(200, 200, 0);
+                            vidas = 3;
+                            personaje.body.setTransform(anchoPantalla/10, altoPantalla/10, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
                             records.add(fondos.metros);
@@ -308,7 +334,7 @@ public class MiJuego extends Game {
 
                     // Record
                 } else if (gameState == GameConstants.SCREEN_RECORD) {
-                    ClickVolver(screenX,screenY);
+                    ClickVolver(screenX, screenY);
 
                     // Config
                 } else if (gameState == GameConstants.SCREEN_CONFIG) {
@@ -323,15 +349,15 @@ public class MiJuego extends Game {
                         musica.stop();
                         isSonido = !isSonido;
                     }
-                    if(fondos.rVibracion.contains(screenX,screenY)) {
+                    if (fondos.rVibracion.contains(screenX, screenY)) {
                         Click();
                         isVibracion = !isVibracion;
                     }
-                    ClickVolver(screenX,screenY);
+                    ClickVolver(screenX, screenY);
 
                     // Tutorial
                 } else if (gameState == GameConstants.SCREEN_CREDITOS) {
-                    ClickVolver(screenX,screenY);
+                    ClickVolver(screenX, screenY);
                 }
                 return true;
             }
@@ -354,13 +380,18 @@ public class MiJuego extends Game {
 
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
-                    if (isSonido) {
-                        muerte.play();
+                    vidas--;
+                    if (vidas == 0) {
+                        if (isSonido) {
+                            muerte.play();
+                        }
+                        if (isVibracion) {
+                            Gdx.input.vibrate(800);
+                        }
+                        hit();
+                    } else {
+                        personaje.body.setTransform(anchoPantalla / 10, altoPantalla / 10, 0);
                     }
-                    if(isVibracion) {
-                        Gdx.input.vibrate(800);
-                    }
-                    hit();
                 }
             }
 
@@ -449,7 +480,7 @@ public class MiJuego extends Game {
             case GameConstants.SCREEN_CREDITOS:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                fondos.dibujarFondoCreditos(GameConstants.CREDITOS_NOMBRES);
+                fondos.dibujarFondoCreditos(GameConstants.CREDITOS_NOMBRES_EQUIPO);
                 spriteBatch.end();
                 break;
         }
@@ -482,7 +513,7 @@ public class MiJuego extends Game {
                 if (objetos.get(i).body.getPosition().x < 0 || objetos.get(i).body.getPosition().y < 0) {
                     world.destroyBody(objetos.get(i).body);
                     objetos.removeIndex(i);
-                    Gdx.app.log("Objetos", objetos.size+"");
+                    Gdx.app.log("Objetos", objetos.size + "");
                 }
             }
             actualizacionNivel();
@@ -564,7 +595,7 @@ public class MiJuego extends Game {
      * Hace el sonido de clickar si en la configuración está activado
      */
     public void Click() {
-        if(isSonido) {
+        if (isSonido) {
             click.play();
         }
     }
@@ -572,6 +603,7 @@ public class MiJuego extends Game {
 
     /**
      * Vuelve al menu principal una vez se clique en el botón de volver
+     *
      * @param screenX posición x donde se pulsa
      * @param screenY posición y donde se pulsa
      */
@@ -589,9 +621,12 @@ public class MiJuego extends Game {
     public void dispose() {
         if (records.size > 0) {
             for (int i = 0; i < records.size; i++) {
-                preferences.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
+                prefRecords.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
             }
+            prefRecords.flush();
         }
+        prefIdioma.putBoolean("idioma", idioma_es);
+        prefIdioma.flush();
         spriteBatch.dispose();
         stage.dispose();
         fondos.font.dispose();
@@ -599,7 +634,8 @@ public class MiJuego extends Game {
 
     /**
      * Cambia las variables al cambiar de tamaño la pantalla
-     * @param width the new width in pixels
+     *
+     * @param width  the new width in pixels
      * @param height the new height in pixels
      */
     @Override
@@ -607,8 +643,8 @@ public class MiJuego extends Game {
         super.resize(width, height);
         fondos.anchoPantalla = GameConstants.ANCHO_PANTALLA;
         fondos.altoPantalla = GameConstants.ALTO_PANTALLA;
-        fondos.width = anchoPantalla/7;
-        fondos.height = altoPantalla/10;
-        fondos.espacio_entre_botones = anchoPantalla/15;
+        fondos.width = anchoPantalla / 7;
+        fondos.height = altoPantalla / 10;
+        fondos.espacio_entre_botones = anchoPantalla / 15;
     }
 }

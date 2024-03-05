@@ -132,8 +132,8 @@ public class Objeto {
         switch (random) {
             case 1:
                 proyectil = new Animation(1f, new TextureRegion[]{
-                        new Sprite(new Texture(Gdx.files.internal("cohete_0.png"))),
-                        new Sprite(new Texture(Gdx.files.internal("cohete_1.png")))
+                        new Sprite(new Texture(Gdx.files.internal("objetos/cohete_0.png"))),
+                        new Sprite(new Texture(Gdx.files.internal("objetos/cohete_1.png")))
                 });
                 anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 22;
                 altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 18;
@@ -142,8 +142,8 @@ public class Objeto {
                 break;
             case 2:
                 proyectil = new Animation(1f, new TextureRegion[]{
-                        new Sprite(new Texture(Gdx.files.internal("flecha_0.png"))),
-                        new Sprite(new Texture(Gdx.files.internal("flecha_1.png")))
+                        new Sprite(new Texture(Gdx.files.internal("objetos/flecha_0.png"))),
+                        new Sprite(new Texture(Gdx.files.internal("objetos/flecha_1.png")))
                 });
                 anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 20;
                 altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 20;
@@ -151,7 +151,7 @@ public class Objeto {
                 isBolaFuego = false;
                 break;
             case 3:
-                bolaFuego = new Texture(Gdx.files.internal("bola_de_fuego.png"));
+                bolaFuego = new Texture(Gdx.files.internal("objetos/bola_de_fuego.png"));
                 anchoObjeto = (int) GameConstants.ANCHO_PANTALLA / 12;
                 altoObjeto = (int) GameConstants.ANCHO_PANTALLA / 12;
                 isBolaFuego = true;

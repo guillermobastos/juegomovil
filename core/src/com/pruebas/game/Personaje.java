@@ -55,9 +55,9 @@ public class Personaje {
      * Animación del personaje Naranja
      */
     public Animation animationNaranja = new Animation(0.25f, new TextureRegion[]{
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_0.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_naranja_1.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_2.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_naranja_3.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_4.png")))
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_0.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_1.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_2.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_3.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_4.png")))
 
     });
 
@@ -65,10 +65,10 @@ public class Personaje {
      * Animación del personaje Naranja muriendo
      */
     public Animation muerteNaranja = new Animation(0.25f, new TextureRegion[]{
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_0.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_1.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_2.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_3.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_4.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_5.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_naranja_muerte_6.png")))
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_0.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_1.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_2.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_3.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_4.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_5.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_naranja_muerte_6.png")))
 
     });
 
@@ -76,9 +76,9 @@ public class Personaje {
      * Animación del personaje Azul
      */
     public Animation animationAzul = new Animation(0.25f, new TextureRegion[]{
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_0.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_azul_1.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_2.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_azul_3.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_4.png")))
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_0.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_1.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_2.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_3.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_4.png")))
 
     });
 
@@ -86,10 +86,10 @@ public class Personaje {
      * Animación del personaje Azul muriendo
      */
     public Animation muerteAzul = new Animation(0.25f, new TextureRegion[]{
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_0.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_1.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_2.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_3.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_4.png"))), new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_5.png"))),
-            new Sprite(new Texture(Gdx.files.internal("personaje_azul_muerte_6.png")))
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_0.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_1.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_2.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_3.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_4.png"))), new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_5.png"))),
+            new Sprite(new Texture(Gdx.files.internal("personajes/personaje_azul_muerte_6.png")))
     });
 
 

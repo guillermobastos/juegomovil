@@ -90,12 +90,12 @@ public class Fondos {
         width = anchoPantalla / 7;
         height = altoPantalla / 10;
         espacio_entre_botones = anchoPantalla / 15;
-        fondoDia = new Texture(Gdx.files.internal("background_cielo_0.png"));
-        fondoNoche = new Texture(Gdx.files.internal("background_noche_0.png"));
-        sol = new Texture(Gdx.files.internal("sol.png"));
-        luna = new Texture(Gdx.files.internal("luna.png"));
-        personaje_skin_naranja = new Texture(Gdx.files.internal("personaje_naranja_0.png"));
-        personaje_skin_azul = new Texture(Gdx.files.internal("personaje_azul_0.png"));
+        fondoDia = new Texture(Gdx.files.internal("fondos/background_cielo_0.png"));
+        fondoNoche = new Texture(Gdx.files.internal("fondos/background_noche_0.png"));
+        sol = new Texture(Gdx.files.internal("fondos/sol.png"));
+        luna = new Texture(Gdx.files.internal("fondos/luna.png"));
+        personaje_skin_naranja = new Texture(Gdx.files.internal("personajes/personaje_naranja_0.png"));
+        personaje_skin_azul = new Texture(Gdx.files.internal("personajes/personaje_azul_0.png"));
         isDia = true;
         miJuego.locale = miJuego.idioma_es ? new Locale("es") : new Locale("en");
         this.spriteBatch = spriteBatch;
@@ -249,10 +249,11 @@ public class Fondos {
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 42);
         font.getData().setScale(1.5f);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")), anchoPantalla / 3 - espacio_entre_botones/2, altoPantalla - espacio_entre_botones/2);
-        for (int i = 0; i < GameConstants.CREDITOS_NOMBRES.length; i++) {
+        for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_EQUIPO.length; i++) {
             font.draw(spriteBatch, String.format("%s", nombres[i]), anchoPantalla / 3 - espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones*2/3));
         }
         dibujarBotonVolver();
+        font.getData().setScale(2.5f);
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
     }
 

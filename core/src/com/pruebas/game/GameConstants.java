@@ -2,9 +2,6 @@ package com.pruebas.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class GameConstants {
 
@@ -58,11 +55,15 @@ public class GameConstants {
     /**
      * Lista de personas que han participado en el proyecto
      */
-    public static final String [] CREDITOS_NOMBRES = {
-            "Programador: Guillermo Bastos",
-            "Beta Tester: Javier Cousido",
-            "Analista programador: Nicolás Fernández",
-            "Analista programadora: Laura",
-            "Asesor: Adrián"
+    public static final String [] CREDITOS_NOMBRES_EQUIPO = {
+            "Guillermo Bastos",
+            "Javier Cousido",
+            "Nicolás Fernández",
+            "Laura",
+            "Adrián"
+    };
+    public static final String [] CREDITOS_NOMBRES_MUSICA = {
+            "Alex daiz",
+            "Maria dri",
     };
 }
