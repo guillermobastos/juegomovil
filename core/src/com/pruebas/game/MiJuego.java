@@ -406,6 +406,8 @@ public class MiJuego extends Game {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
                 Gdx.app.log("Vidas", vidas + "");
+                Gdx.app.log("User data a",  fa.getBody().getUserData()+ "");
+                Gdx.app.log("User data b",  fb.getBody().getUserData()+ "");
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
                     vidas--;

@@ -252,7 +252,7 @@ public class Fondos {
             font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_EQUIPO[i]), anchoPantalla / 3 - espacio_entre_botones / 4, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones * 2 / 3));
         }
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_MUSICA.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla / 3 - espacio_entre_botones / 4, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones * 2 / 3));
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla / 2, altoPantalla - espacio_entre_botones - ((i + 1) * espacio_entre_botones * 2 / 3));
         }
         dibujarBotonVolver();
 //        font.getData().setScale(2.5f);

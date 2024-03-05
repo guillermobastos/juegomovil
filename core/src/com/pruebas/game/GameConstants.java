@@ -62,6 +62,10 @@ public class GameConstants {
             "Laura",
             "Adrián"
     };
+
+    /**
+     * Lista de personas que han elaborado la música
+     */
     public static final String [] CREDITOS_NOMBRES_MUSICA = {
             "Alex daiz",
             "Maria dri",
