@@ -189,7 +189,7 @@ public class MiJuego extends Game {
         // Persistencia de los records
         prefRecords = Gdx.app.getPreferences("records");
         if (prefRecords.get().size() > 0) {
-            for (int i = 0; i < prefRecords.get().size(); i++) {
+            for (int i = 0; i < prefRecords.get().size()-1; i++) {
                 records.add(prefRecords.getFloat("records" + i));
             }
         }
