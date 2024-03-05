@@ -112,7 +112,7 @@ public class MiJuego extends Game {
     /**
      * Colección de los records
      */
-    public static Array<Double> records = new Array<>();
+    public static Array<Float> records = new Array<>();
 
     /**
      * Clase que define una región visible del mundo del juego y
@@ -185,13 +185,12 @@ public class MiJuego extends Game {
         nivel = 1;
         vidas = 3;
         isTouched = false;
-        records.clear();
 
         // Persistencia de los records
         prefRecords = Gdx.app.getPreferences("records");
         if (prefRecords.get().size() > 0) {
             for (int i = 0; i < prefRecords.get().size(); i++) {
-                records.add((double) prefRecords.getFloat("records" + i));
+                records.add(prefRecords.getFloat("records" + i));
             }
         }
         // Persistencia del idioma
@@ -321,9 +320,10 @@ public class MiJuego extends Game {
                         }
                         if (fondos.rSalir.contains(screenX, screenY)) {
                             Click();
+                            records.add(fondos.metros);
                             if (records.size > 0) {
                                 for (int i = 0; i < records.size && i < 10; i++) {
-                                    prefRecords.putFloat("record" + i, Float.parseFloat(records.get(i).toString()));
+                                    prefRecords.putFloat("record" + i, records.get(i));
                                     prefRecords.flush();
                                 }
                             }
@@ -332,7 +332,6 @@ public class MiJuego extends Game {
                             personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
-                            records.add(fondos.metros);
                             gameState = GameConstants.SCREEN_MENU;
                             fondos.font.setColor(Color.WHITE);
                             actualizaAnimacion();
@@ -407,13 +406,12 @@ public class MiJuego extends Game {
             public void endContact(Contact contact) {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
-                Gdx.app.log("Vidas", vidas + "");
-                Gdx.app.log("User data a", fa.getBody().getUserData() + "");
-                Gdx.app.log("User data b", fb.getBody().getUserData() + "");
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
-
-//                    vidas--;
+                    isTouched = !isTouched;
+                    if (isTouched) {
+                        vidas--;
+                    }
                 }
             }
 

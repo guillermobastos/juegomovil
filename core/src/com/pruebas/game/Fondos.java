@@ -42,7 +42,7 @@ public class Fondos {
     /**
      * Metros recorridos por el personaje
      */
-    public double metros;
+    public float metros;
 
     /**
      * Tamaño botones y espacio entre ellos
@@ -234,7 +234,7 @@ public class Fondos {
      *
      * @param records
      */
-    public void dibujarFondoRecord(Array<Double> records) {
+    public void dibujarFondoRecord(Array<Float> records) {
         dibujarFondo();
         dibujarRecords(records);
         dibujarBotonVolver();
@@ -364,7 +364,7 @@ public class Fondos {
      *
      * @param records matriz de records
      */
-    public void dibujarRecords(Array<Double> records) {
+    public void dibujarRecords(Array<Float> records) {
         font.getData().setScale(2);
         font.setColor(Color.WHITE);
         if (records.size > 0) {

@@ -131,7 +131,6 @@ public class Personaje {
      */
     public void move(float x, float y) {;
         body.setTransform(new Vector2(body.getPosition().x+x*2,body.getPosition().y+y*2),0);
-//        position.add(body.getPosition().x, body.getPosition().y);
     }
 
     /**
