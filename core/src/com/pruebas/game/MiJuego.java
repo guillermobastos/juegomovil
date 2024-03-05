@@ -495,7 +495,7 @@ public class MiJuego extends Game {
             case GameConstants.SCREEN_CREDITOS:
                 spriteBatch.begin();
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                fondos.dibujarFondoCreditos(GameConstants.CREDITOS_NOMBRES_EQUIPO);
+                fondos.dibujarFondoCreditos();
                 spriteBatch.end();
                 break;
         }
