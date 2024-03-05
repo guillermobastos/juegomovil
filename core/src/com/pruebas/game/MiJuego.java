@@ -312,7 +312,7 @@ public class MiJuego extends Game {
                             Click();
                             personaje.death = false;
                             vidas = 3;
-                            personaje.body.setTransform(anchoPantalla/10, altoPantalla/10, 0);
+                            personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
                             actualizaAnimacion();
@@ -321,7 +321,7 @@ public class MiJuego extends Game {
                             Click();
                             personaje.death = isTutorial = false;
                             vidas = 3;
-                            personaje.body.setTransform(anchoPantalla/10, altoPantalla/10, 0);
+                            personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
                             objeto = new Objeto(anchoPantalla, altoPantalla, world, fondos.miJuego);
                             objetos.add(objeto);
                             records.add(fondos.metros);
@@ -381,16 +381,16 @@ public class MiJuego extends Game {
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
                     vidas--;
+                    if (isSonido) {
+                        muerte.play();
+                    }
+                    if (isVibracion) {
+                        Gdx.input.vibrate(800);
+                    }
                     if (vidas == 0) {
-                        if (isSonido) {
-                            muerte.play();
-                        }
-                        if (isVibracion) {
-                            Gdx.input.vibrate(800);
-                        }
                         hit();
                     } else {
-                        personaje.body.setTransform(anchoPantalla / 10, altoPantalla / 10, 0);
+                        personaje.body.setTransform(anchoPantalla / 5, altoPantalla / 5, 0);
                     }
                 }
             }
