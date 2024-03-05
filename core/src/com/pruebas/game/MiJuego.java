@@ -185,6 +185,7 @@ public class MiJuego extends Game {
         nivel = 1;
         vidas = 3;
         isTouched = false;
+        records.clear();
 
         // Persistencia de los records
         prefRecords = Gdx.app.getPreferences("records");
