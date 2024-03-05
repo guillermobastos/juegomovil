@@ -385,7 +385,6 @@ public class MiJuego extends Game {
             public void beginContact(Contact contact) {
                 Fixture fa = contact.getFixtureA();
                 Fixture fb = contact.getFixtureB();
-                Gdx.app.log("Vidas", vidas + "");
                 if (fa.getBody().getUserData().equals("player") ||
                         fb.getBody().getUserData().equals("player")) {
                     if (isSonido) {
@@ -515,6 +514,7 @@ public class MiJuego extends Game {
         stage.draw();
         fondos.dibujarSolOLuna();
         fondos.dibujarMetros();
+        fondos.dibujarVidas();
         personaje.update();
         personaje.render(spriteBatch);
         if (!personaje.death) {
