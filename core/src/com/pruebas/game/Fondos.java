@@ -393,7 +393,7 @@ public class Fondos {
 
     public void dibujarVidas() {
         for (int i = 0; i < miJuego.vidas; i++) {
-            spriteBatch.draw(vidas, anchoPantalla / 8 + (i + 1)*anchoPantalla/10, altoPantalla - vidas.getHeight());
+            spriteBatch.draw(vidas, anchoPantalla / 8 + (i + 1) * vidas.getWidth()*1.2f, altoPantalla - vidas.getHeight() * 1.2f);
         }
     }
 
