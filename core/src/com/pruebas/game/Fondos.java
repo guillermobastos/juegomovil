@@ -340,11 +340,10 @@ public class Fondos {
         font.getData().setScale(2f);
         font.setColor(GameConstants.COLORES[miJuego.nivel - 1]);
         if (metros < 1000) {
-            font.draw(spriteBatch, String.format("%s %d: %.0fm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros), anchoPantalla / 2 - espacio_entre_botones / 2, altoPantalla - altoPantalla / 25);
+            font.draw(spriteBatch, String.format("%s %d: %.0fm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros), anchoPantalla / 2 - espacio_entre_botones , altoPantalla - altoPantalla / 25);
         } else {
-            font.draw(spriteBatch, String.format("%s %d: %.2fkm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros / 1000), anchoPantalla / 2 - espacio_entre_botones / 2, altoPantalla - altoPantalla / 25);
+            font.draw(spriteBatch, String.format("%s %d: %.2fkm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros / 1000), anchoPantalla / 2 - espacio_entre_botones , altoPantalla - altoPantalla / 25);
         }
-        font.draw(spriteBatch, String.format("Accelerometer:%.0f", Gdx.input.getAccelerometerX()), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - altoPantalla / 25);
     }
 
     /**

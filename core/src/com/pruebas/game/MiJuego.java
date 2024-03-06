@@ -552,9 +552,9 @@ fondos.spriteBatch=spriteBatch;
      */
     public void procesarEntrada() {
         if(Gdx.input.getAccelerometerX() > 5) {
-            personaje.move(0,2);
+            personaje.move(0,1f);
         } else {
-            personaje.move(0,-1);
+            personaje.move(0,-0.4f);
         }
         if (Gdx.input.isTouched() && !personaje.death) {
             if (Gdx.input.getX() < anchoPantalla / 2) {

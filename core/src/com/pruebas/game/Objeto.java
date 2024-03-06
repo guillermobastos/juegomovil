@@ -95,7 +95,11 @@ public class Objeto {
             x = (float) (Math.random() * (GameConstants.ANCHO_PANTALLA - anchoObjeto) + anchoObjeto / 2);
             position = new Vector2(x, GameConstants.ALTO_PANTALLA);
             bodyDef.position.set(x, GameConstants.ALTO_PANTALLA);
+        } else if(isFlecha){
+            position = new Vector2(x, y);
+            bodyDef.position.set(x, y);
         } else {
+            y = (float) (Math.random() * (GameConstants.ALTO_PANTALLA/2 - altoObjeto) + GameConstants.ALTO_PANTALLA/ 2);
             position = new Vector2(x, y);
             bodyDef.position.set(x, y);
         }
@@ -172,7 +176,7 @@ public class Objeto {
             x *= 1.2f;
         }
         if (isCohete) {
-            body.setTransform(new Vector2(body.getPosition().x + 2 * x, body.getPosition().y + 2 * y), 0);
+            body.setTransform(new Vector2(body.getPosition().x + 2 * x, body.getPosition().y + 1 * y), 0);
         }
         if (isFlecha) {
             if (body.getPosition().x < GameConstants.ANCHO_PANTALLA / 2) {
