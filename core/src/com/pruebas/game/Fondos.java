@@ -105,7 +105,7 @@ public class Fondos {
      * Jugar Partida // Configuración // Records // Personaje // Mapa
      */
     public void dibujarFondoMenu() {
-        textureAtlas = miJuego.idioma_es ? new TextureAtlas("botones_es.txt") : new TextureAtlas("botones_en.txt");
+        textureAtlas = miJuego.idioma_es ? new TextureAtlas("botones/botones_es.txt") : new TextureAtlas("botones/botones_en.txt");
         // Btn Jugar
         botonJugar = textureAtlas.createSprite("button_jugar_partida");
         botonJugar.setSize(width, height);
@@ -163,7 +163,7 @@ public class Fondos {
      */
     public void dibujarFondoConfig() {
         dibujarFondo();
-        textureAtlas = new TextureAtlas("botones_vibracion.txt");
+        textureAtlas = new TextureAtlas("botones/botones_vibracion.txt");
         if (miJuego.isVibracion) {
             botonVibracion = textureAtlas.createSprite("imagen_vibracion");
             botonVibracion.setSize(width, height);
@@ -177,7 +177,7 @@ public class Fondos {
         }
         rVibracion = new Rectangle(anchoPantalla * 1 / 7, altoPantalla / 2, width, height);
 
-        textureAtlas = new TextureAtlas("botones_sonido.txt");
+        textureAtlas = new TextureAtlas("botones/botones_sonido.txt");
         if (miJuego.isSonido) {
             botonSonido = textureAtlas.createSprite("sonido_on");
             botonSonido.setSize(width, height);
@@ -190,7 +190,7 @@ public class Fondos {
             botonSinSonido.draw(spriteBatch);
         }
         rSonido = new Rectangle(anchoPantalla * 3 / 7, altoPantalla / 2, width, height);
-        textureAtlas = new TextureAtlas("botones_idioma.txt");
+        textureAtlas = new TextureAtlas("botones/botones_idioma.txt");
         if (miJuego.idioma_es) {
             botonEsp = textureAtlas.createSprite("idioma_es");
             botonEsp.setSize(width, height);
@@ -290,7 +290,7 @@ public class Fondos {
      * en rojo de que ha muerto
      */
     public void dibujarFondoMuerte() {
-        textureAtlas = miJuego.idioma_es ? new TextureAtlas("botones_muerte_es.txt") : new TextureAtlas("botones_muerte_en.txt");
+        textureAtlas = miJuego.idioma_es ? new TextureAtlas("botones/botones_muerte_es.txt") : new TextureAtlas("botones/botones_muerte_en.txt");
         botonVolverJugar = textureAtlas.createSprite("button_volver_jugar");
         botonVolverJugar.setSize(width, height);
         botonVolverJugar.setPosition(anchoPantalla / 2 - botonJugar.getWidth() - 30, altoPantalla / 2);
@@ -350,7 +350,7 @@ public class Fondos {
      * Dibuja el botón de volver
      */
     public void dibujarBotonVolver() {
-        volver = miJuego.idioma_es ? new Texture(Gdx.files.internal("button_volver_es.png")) : new Texture(Gdx.files.internal("button_volver_en.png"));
+        volver = miJuego.idioma_es ? new Texture(Gdx.files.internal("botones/button_volver_es.png")) : new Texture(Gdx.files.internal("botones/button_volver_en.png"));
         spriteBatch.draw(volver, anchoPantalla - width - espacio_entre_botones, espacio_entre_botones, width, height);
         rVolver = new Rectangle(anchoPantalla - width - espacio_entre_botones, espacio_entre_botones, width, height);
     }
