@@ -94,8 +94,7 @@ public class Fondos {
     TextureRegion textureRegion;
 
     public Fondos(Batch spriteBatch, MiJuego miJuego) {
-
-        desiredFontSize = (int) (18 * Gdx.graphics.getDensity());
+        desiredFontSize = Math.min(miJuego.anchoPantalla,miJuego.altoPantalla)/25;
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), desiredFontSize);
         font.setColor(Color.WHITE);
         this.miJuego = miJuego;
