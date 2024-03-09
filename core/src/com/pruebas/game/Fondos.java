@@ -94,10 +94,9 @@ public class Fondos {
     TextureRegion textureRegion;
 
     public Fondos(Batch spriteBatch, MiJuego miJuego) {
-        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        desiredFontSize = 24;
-        parameter.size = (int) (desiredFontSize * Gdx.graphics.getDensity());
-        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), parameter.size);
+
+        desiredFontSize = (int) (18 * Gdx.graphics.getDensity());
+        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), desiredFontSize);
         font.setColor(Color.WHITE);
         this.miJuego = miJuego;
         anchoPantalla = GameConstants.ANCHO_PANTALLA;
@@ -175,7 +174,6 @@ public class Fondos {
         botonCreditos.setPosition(1.5f * espacio_entre_botones + botonConfig.getWidth(), espacio_entre_botones);
         rCreditos = new Rectangle(1.5f * espacio_entre_botones + botonConfig.getWidth(), espacio_entre_botones, width, height);
         botonCreditos.draw(spriteBatch);
-
     }
 
     /**
@@ -232,8 +230,6 @@ public class Fondos {
      */
     public void dibujarTutorial() {
         font.setColor(Color.WHITE);
-        reiniciarFuente();
-        font.getData().setScale(1.50F);
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_derecho"), espacio_entre_botones, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_izquierdo"), anchoPantalla * 3 / 4, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         if (metros < 200) {
@@ -241,10 +237,10 @@ public class Fondos {
         } else if (metros < 700) {
             font.draw(spriteBatch, miJuego.myBundle.get("tutorial_sobrevive"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 4, 50, true);
         } else {
-            font.getData().setScale(2.50F);
+            font.getData().setScale(1.2f);
             font.draw(spriteBatch, miJuego.myBundle.get("tutorial_completado"), anchoPantalla * 5 / 12, altoPantalla - espacio_entre_botones, anchoPantalla / 4, 100, false);
-            font.getData().setScale(1);
         }
+        reiniciarFuente(desiredFontSize);
     }
 
 
@@ -264,21 +260,25 @@ public class Fondos {
      */
     public void dibujarFondoCreditos() {
         dibujarFondo();
-        reiniciarFuente();
-        font.getData().setScale(1.5f);
+        reiniciarFuente(desiredFontSize);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos") + ": " + miJuego.myBundle.get("gracias")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("participantes")), anchoPantalla / 5, altoPantalla - espacio_entre_botones * 1.5f);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 3 +espacio_entre_botones, altoPantalla - espacio_entre_botones * 1.5f);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("recurso")), anchoPantalla / 2 + espacio_entre_botones , altoPantalla - espacio_entre_botones * 1.5f);
+        reiniciarFuente(desiredFontSize*0.7f);
+        // Participantes
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_EQUIPO.length; i++) {
             font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_EQUIPO[i]), anchoPantalla / 5, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
         }
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 3 +espacio_entre_botones, altoPantalla - espacio_entre_botones * 1.5f);
+        // Musica
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_MUSICA.length; i++) {
             font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla / 3 +espacio_entre_botones, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
         }
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("recurso")), anchoPantalla / 2 + espacio_entre_botones , altoPantalla - espacio_entre_botones * 1.5f);
+        // Recursos
         for (int i = 0; i < GameConstants.CREDITOS_PAGINAS_IMAGENES.length; i++) {
             font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_PAGINAS_IMAGENES[i]), anchoPantalla / 2 + espacio_entre_botones, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
         }
+        reiniciarFuente(desiredFontSize);
         dibujarBotonVolver();
     }
 
@@ -288,14 +288,14 @@ public class Fondos {
      * en la mitad derecha
      */
     public void dibujarFondoMapa() {
-        reiniciarFuente();
-        font.getData().setScale(2f);
+        reiniciarFuente(desiredFontSize*1.2f);
         spriteBatch.draw(fondoDia, 0, 0, anchoPantalla / 2, altoPantalla);
         spriteBatch.draw(sol, -sol.getWidth() / 3, altoPantalla - sol.getHeight() / 2);
         font.draw(spriteBatch, miJuego.myBundle.get("dia"), anchoPantalla / 5, altoPantalla * 3 / 4);
         spriteBatch.draw(fondoNoche, anchoPantalla / 2, 0, anchoPantalla / 2, altoPantalla);
         spriteBatch.draw(luna, anchoPantalla - luna.getWidth() * 2 / 3, altoPantalla - luna.getHeight() / 2);
         font.draw(spriteBatch, miJuego.myBundle.get("noche"), anchoPantalla * 3 / 5, altoPantalla * 3 / 4);
+        reiniciarFuente(desiredFontSize);
     }
 
     /**
@@ -329,7 +329,7 @@ public class Fondos {
         rSalir = new Rectangle(anchoPantalla / 2 + botonJugar.getWidth() - 30, altoPantalla / 2, width, height);
 
         font.setColor(Color.RED);
-        font.getData().setScale(2);
+        font.getData().setScale(1.2f);
         font.draw(spriteBatch, miJuego.myBundle.get("muerte"), anchoPantalla * 3 / 10, altoPantalla * 4 / 5);
     }
 
@@ -362,13 +362,14 @@ public class Fondos {
      * y el Acelerómetro
      */
     public void dibujarMetros() {
-        reiniciarFuente();
+        reiniciarFuente(desiredFontSize*0.8f);
         font.setColor(GameConstants.COLORES[miJuego.nivel - 1]);
         if (metros < 1000) {
             font.draw(spriteBatch, String.format("%s %d: %.0fm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros), anchoPantalla / 2 - espacio_entre_botones, altoPantalla - altoPantalla / 25);
         } else {
             font.draw(spriteBatch, String.format("%s %d: %.2fkm", miJuego.myBundle.get("nivel"), miJuego.nivel, metros / 1000), anchoPantalla / 2 - espacio_entre_botones, altoPantalla - altoPantalla / 25);
         }
+        reiniciarFuente(desiredFontSize);
     }
 
     /**
@@ -387,8 +388,7 @@ public class Fondos {
      * @param records matriz de records
      */
     public void dibujarRecords(Array<Float> records) {
-        reiniciarFuente();
-        font.getData().setScale(2);
+        reiniciarFuente(desiredFontSize);
         font.setColor(Color.WHITE);
         if (records.size > 0) {
             records.sort();
@@ -408,11 +408,12 @@ public class Fondos {
                 }
             }
         } else {
-            font.getData().setScale(2);
+            font.getData().setScale(desiredFontSize*1.2f);
             font.setColor(Color.RED);
             font.draw(spriteBatch, miJuego.myBundle.get("no_records"), anchoPantalla / 4, altoPantalla / 2, anchoPantalla * 3 / 5, 10, false);
         }
         font.setColor(Color.WHITE);
+        reiniciarFuente(desiredFontSize);
     }
 
 
@@ -434,21 +435,18 @@ public class Fondos {
      */
     public BitmapFont generateFont(String path, double size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(path));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-        parameters.genMipMaps = true;
-        parameters.size = (int) Math.ceil(size);
-        parameters.magFilter = Texture.TextureFilter.Linear;
-        parameters.minFilter = Texture.TextureFilter.Linear;
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.genMipMaps = true;
+        parameter.size = (int) Math.ceil(size);
+        parameter.magFilter = Texture.TextureFilter.Linear;
+        parameter.minFilter = Texture.TextureFilter.Linear;
         generator.scaleForPixelHeight((int) size);
 
-        return generator.generateFont(parameters);
+        return generator.generateFont(parameter);
     }
 
-    public void reiniciarFuente() {
-        desiredFontSize = 24;
-        parameter.size = (int) (desiredFontSize * Gdx.graphics.getDensity());
-        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), parameter.size);
+    public void reiniciarFuente(float size) {
+        font.getData().setScale(size/desiredFontSize);
     }
 
 

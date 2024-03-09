@@ -428,8 +428,8 @@ public class MiJuego extends Game {
      */
     @Override
     public void render() {
-spriteBatch=new SpriteBatch();
-fondos.spriteBatch=spriteBatch;
+        spriteBatch = new SpriteBatch();
+        fondos.spriteBatch = spriteBatch;
         switch (gameState) {
 
             // Pantalla de Juego
@@ -510,7 +510,6 @@ fondos.spriteBatch=spriteBatch;
      */
     public void Jugar() {
         fueraLimites();
-        fondos.font.getData().setScale(1);
         fondos.font.setColor(Color.WHITE);
         stage.act();
         stage.draw();
@@ -551,10 +550,10 @@ fondos.spriteBatch=spriteBatch;
      * Gestiona el movimiento del personaje
      */
     public void procesarEntrada() {
-        if(Gdx.input.getAccelerometerX() > 5) {
-            personaje.move(0,1f);
+        if (Gdx.input.getAccelerometerX() > 5) {
+            personaje.move(0, 1f);
         } else {
-            personaje.move(0,-0.4f);
+            personaje.move(0, -0.4f);
         }
         if (Gdx.input.isTouched() && !personaje.death) {
             if (Gdx.input.getX() < anchoPantalla / 2) {
@@ -641,6 +640,7 @@ fondos.spriteBatch=spriteBatch;
      */
     @Override
     public void dispose() {
+//        fondos.font.dispose();
         spriteBatch.dispose();
         fondos.textureAtlas.dispose();
     }
