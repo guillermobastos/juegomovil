@@ -79,8 +79,22 @@ public class Fondos {
      *
      * @param spriteBatch lienzo donde se va a dibujar
      */
+
+    /**
+     * para generar una fuente con el tamaño deseado
+     */
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+
+    /**
+     *  tamaño de la fuente que deseas
+     */
+    float desiredFontSize;
+
     public Fondos(Batch spriteBatch, MiJuego miJuego) {
-        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 24);
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        desiredFontSize = 24;
+        parameter.size = (int) (desiredFontSize * Gdx.graphics.getDensity());
+        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), parameter.size);
         font.setColor(Color.WHITE);
         this.miJuego = miJuego;
         anchoPantalla = GameConstants.ANCHO_PANTALLA;
@@ -243,7 +257,8 @@ public class Fondos {
      */
     public void dibujarFondoCreditos() {
         dibujarFondo();
-        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 42);
+
+//        font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), 42);
         font.getData().setScale(1.5f);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos")+ ": "+ miJuego.myBundle.get("gracias")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("participantes")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones*1.5f);
