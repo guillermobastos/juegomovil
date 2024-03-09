@@ -229,6 +229,7 @@ public class Fondos {
      */
     public void dibujarTutorial() {
         font.setColor(Color.WHITE);
+        reiniciarFuente(desiredFontSize);
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_derecho"), espacio_entre_botones, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         font.draw(spriteBatch, miJuego.myBundle.get("tutorial_btn_izquierdo"), anchoPantalla * 3 / 4, altoPantalla - espacio_entre_botones, anchoPantalla / 5, 50, true);
         if (metros < 200) {
@@ -262,8 +263,7 @@ public class Fondos {
         reiniciarFuente(desiredFontSize);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos") + ": " + miJuego.myBundle.get("gracias")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("participantes")), anchoPantalla / 5, altoPantalla - espacio_entre_botones * 1.5f);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 3 +espacio_entre_botones, altoPantalla - espacio_entre_botones * 1.5f);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("recurso")), anchoPantalla / 2 + espacio_entre_botones , altoPantalla - espacio_entre_botones * 1.5f);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones * 1.5f);
         reiniciarFuente(desiredFontSize*0.7f);
         // Participantes
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_EQUIPO.length; i++) {
@@ -271,11 +271,11 @@ public class Fondos {
         }
         // Musica
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_MUSICA.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla / 3 +espacio_entre_botones, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla /  2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3),anchoPantalla / 4, 50, true);
         }
         // Recursos
         for (int i = 0; i < GameConstants.CREDITOS_PAGINAS_IMAGENES.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_PAGINAS_IMAGENES[i]), anchoPantalla / 2 + espacio_entre_botones, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3));
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_PAGINAS_IMAGENES[i]), anchoPantalla /  2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 4) * espacio_entre_botones * 2 / 3),anchoPantalla / 4, 50, true);
         }
         reiniciarFuente(desiredFontSize);
         dibujarBotonVolver();
