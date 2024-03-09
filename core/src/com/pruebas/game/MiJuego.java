@@ -662,6 +662,7 @@ public class MiJuego extends Game {
         fondos.altoPantalla = height;
         fondos.width = anchoPantalla / 7;
         fondos.height = altoPantalla / 10;
-        fondos.espacio_entre_botones = anchoPantalla / 15;
+        fondos.espacio_entre_botones = width / 15;
+        fondos.espacio_entre_records = height/15;
     }
 }

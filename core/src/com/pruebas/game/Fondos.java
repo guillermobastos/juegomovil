@@ -50,7 +50,7 @@ public class Fondos {
     /**
      * Tamaño botones y espacio entre ellos
      */
-    public float width, height, espacio_entre_botones;
+    public float width, height, espacio_entre_botones, espacio_entre_records;
 
     /**
      * Fuente usada
@@ -105,6 +105,7 @@ public class Fondos {
         width = anchoPantalla / 7;
         height = altoPantalla / 10;
         espacio_entre_botones = anchoPantalla / 15;
+        espacio_entre_records = altoPantalla/15;
         fondoDia = new Texture(Gdx.files.internal("fondos/background_cielo_0.png"));
         fondoNoche = new Texture(Gdx.files.internal("fondos/background_noche_0.png"));
         sol = new Texture(Gdx.files.internal("fondos/sol.png"));
@@ -263,23 +264,25 @@ public class Fondos {
     public void dibujarFondoCreditos() {
         dibujarFondo();
         reiniciarFuente(desiredFontSize);
+        font.setColor(Color.BLACK);
         font.draw(spriteBatch, String.format(miJuego.myBundle.get("creditos") + ": " + miJuego.myBundle.get("gracias")), anchoPantalla / 3 - espacio_entre_botones / 2, altoPantalla - espacio_entre_botones / 2);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("participantes")), anchoPantalla / 5, altoPantalla - espacio_entre_botones * 1.5f,anchoPantalla / 4, center, true);
-        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones * 1.5f,anchoPantalla / 4, center, true);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("participantes")), anchoPantalla / 10, altoPantalla - espacio_entre_botones * 1.5f,anchoPantalla / 3, center, true);
+        font.draw(spriteBatch, String.format(miJuego.myBundle.get("musica")), anchoPantalla / 2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones * 1.5f,anchoPantalla / 3, center, false);
         reiniciarFuente(desiredFontSize*0.7f);
         // Participantes
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_EQUIPO.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_EQUIPO[i]), anchoPantalla / 5, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3),anchoPantalla / 4, center, true);
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_EQUIPO[i]), anchoPantalla / 10, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3),anchoPantalla / 3, center, true);
         }
         // Musica
         for (int i = 0; i < GameConstants.CREDITOS_NOMBRES_MUSICA.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla /  2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3),anchoPantalla / 4, center, true);
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_NOMBRES_MUSICA[i]), anchoPantalla /  2 , altoPantalla - espacio_entre_botones - ((i + 2) * espacio_entre_botones * 2 / 3),anchoPantalla / 3, center, true);
         }
         // Recursos
         for (int i = 0; i < GameConstants.CREDITOS_PAGINAS_IMAGENES.length; i++) {
-            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_PAGINAS_IMAGENES[i]), anchoPantalla /  2 +espacio_entre_botones/2, altoPantalla - espacio_entre_botones - ((i + 4) * espacio_entre_botones * 2 / 3),anchoPantalla / 4, center, true);
+            font.draw(spriteBatch, String.format("%s", GameConstants.CREDITOS_PAGINAS_IMAGENES[i]), anchoPantalla /  2 , altoPantalla - espacio_entre_botones - ((i + 4) * espacio_entre_botones * 2 / 3),anchoPantalla / 3, center, false);
         }
         reiniciarFuente(desiredFontSize);
+        font.setColor(Color.WHITE);
         dibujarBotonVolver();
     }
 
@@ -397,13 +400,13 @@ public class Fondos {
             int i = records.size - 1;
             if (records.size < 10) {
                 while (i >= 0) {
-                    font.draw(spriteBatch, String.format("%2d- %8.1fm", cont, records.get(i)), anchoPantalla / 2 - 100, altoPantalla - (cont + 1) * 60);
+                    font.draw(spriteBatch, String.format("%2d- %8.1fm", cont, records.get(i)), anchoPantalla / 2- espacio_entre_botones , altoPantalla - (cont) *espacio_entre_records);
                     i--;
                     cont++;
                 }
             } else {
                 while (i >= records.size - 10) {
-                    font.draw(spriteBatch, String.format("%2d- %8.1fm", cont, records.get(i)), anchoPantalla / 2 - 100, altoPantalla - (cont + 1) * 60);
+                    font.draw(spriteBatch, String.format("%2d- %8.1fm", cont, records.get(i)), anchoPantalla / 2-espacio_entre_botones , altoPantalla - (cont) * espacio_entre_records);
                     i--;
                     cont++;
                 }
