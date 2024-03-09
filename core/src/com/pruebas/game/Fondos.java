@@ -94,12 +94,12 @@ public class Fondos {
     TextureRegion textureRegion;
 
     public Fondos(Batch spriteBatch, MiJuego miJuego) {
-        desiredFontSize = Math.min(miJuego.anchoPantalla,miJuego.altoPantalla)/25;
+        desiredFontSize = Math.min(miJuego.anchoPantalla,miJuego.altoPantalla)/22;
         font = generateFont(Gdx.files.internal("fuente_01.ttf").path(), desiredFontSize);
         font.setColor(Color.WHITE);
         this.miJuego = miJuego;
-        anchoPantalla = GameConstants.ANCHO_PANTALLA;
-        altoPantalla = GameConstants.ALTO_PANTALLA;
+        anchoPantalla = miJuego.anchoPantalla;
+        altoPantalla = miJuego.altoPantalla;
         width = anchoPantalla / 7;
         height = altoPantalla / 10;
         espacio_entre_botones = anchoPantalla / 15;

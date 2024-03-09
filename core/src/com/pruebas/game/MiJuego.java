@@ -656,8 +656,10 @@ public class MiJuego extends Game {
         super.resize(width, height);
         altoPantalla = height;
         anchoPantalla = width;
-        fondos.anchoPantalla = GameConstants.ANCHO_PANTALLA;
-        fondos.altoPantalla = GameConstants.ALTO_PANTALLA;
+//        fondos.anchoPantalla = GameConstants.ANCHO_PANTALLA;
+//        fondos.altoPantalla = GameConstants.ALTO_PANTALLA;
+        fondos.anchoPantalla = width;
+        fondos.altoPantalla = height;
         fondos.width = anchoPantalla / 7;
         fondos.height = altoPantalla / 10;
         fondos.espacio_entre_botones = anchoPantalla / 15;
