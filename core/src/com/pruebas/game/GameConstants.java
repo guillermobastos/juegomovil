@@ -70,4 +70,13 @@ public class GameConstants {
             "Alex daiz",
             "Pixabay.com",
     };
+
+    /**
+     * lista de paginas web para los recursos
+     */
+    public static final String [] CREDITOS_PAGINAS_IMAGENES = {
+            "https://www.pixilart.com",
+            "https://www.flaticon.es",
+            "https://www.clickminded.com/button-generator/"
+    };
 }
