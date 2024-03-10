@@ -77,6 +77,7 @@ public class GameConstants {
     public static final String [] CREDITOS_PAGINAS_IMAGENES = {
             "https://www.pixilart.com",
             "https://www.flaticon.es",
-            "https://www.clickminded.com/button-generator/"
+            "https://www.clickminded.com"
     };
+//    /button-generator/
 }
